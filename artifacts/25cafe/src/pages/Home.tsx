@@ -117,7 +117,7 @@ export default function Home() {
               variants={fadeUp}
               src={logoSrc}
               alt="Café 25"
-              className="h-24 w-24 object-contain mb-8 opacity-90 bg-[#141010de]"
+              className="h-24 w-24 object-contain mb-8 opacity-90 bg-[#141010b5]"
             />
             <motion.h1
               variants={fadeUp}
