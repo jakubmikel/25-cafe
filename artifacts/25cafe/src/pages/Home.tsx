@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MapPin, Clock, Moon, Check, Instagram } from 'lucide-react';
 import { SiTiktok } from 'react-icons/si';
-import logoSrc from '@assets/cafe25-logo-clock_1775582027169.png';
+import logoSrc from '@assets/cafe25-logo-nobg.png';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 
