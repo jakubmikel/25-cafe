@@ -1,0 +1,87 @@
+Tady je návrh textů (copywritingu) a struktury pro váš web. Tento text není typická nudná "o nás" stránka. Je to digitální manifest vaší značky. Web by měl být designován v "Dark Mode" (tmavé pozadí, pískové a tlumeně oranžové texty) a texty jsou koncipovány tak, aby návštěvníka okamžitě vtáhly do děje a donutily ho k akci.
+
+Zde je struktura vaší jednostránkové (One-page) domény:
+
+---
+
+### [Sekce 1: HERO (To, co člověk vidí okamžitě po načtení)]
+
+*(Vizuál na pozadí: Tmavá, náladová fotka z profilu, jak někdo soustředěně ťuká do notebooku. Osvícený jen monitorem a teplou lampičkou. Vedle klávesnice kouřící hrnek.)*
+
+**[Hlavní nadpis (Obří font)]**
+# KDYŽ MĚSTO USÍNÁ, TVŮJ DEADLINE NE.
+
+**[Podnadpis]**
+Knihovna zavřela. V baru je hluk. Doma tě ničí prokrastinace. 
+Vítej v **25 Cafe** – prvním nočním *deep-work* azylu v Liberci. 
+Místo, které ožívá v 18:00 a chrání tvé soustředění až do 1:00 ráno.
+
+**[Hlavní tlačítko (Call to Action)]**
+👉 **ZÍSKAT BLACK CARD (VIP WAITLIST)** *(Malý text pod tlačítkem: "Otevíráme brzy. Kapacita prvních členů je omezená.")*
+
+---
+
+### [Sekce 2: IDENTIFIKACE BOLISTKY (Proč jsme vznikli)]
+
+*(Rozděleno na dvě poloviny – Levá temnější, Pravá světlejší)*
+
+**[Nadpis]**
+## OSTATNÍ ZAVÍRAJÍ. MY ZAČÍNÁME.
+
+**[Text]**
+Znáš ten pocit. Je 20:00. Potřebuješ nutně pracovat, učit se nebo tvořit. Ale denní kavárny zvedají židle. Zbývají ti jen dvě možnosti: jít do hospody, kde přes křik neslyšíš vlastní myšlenky, nebo jít domů, kde na tebe zírá postel a hlučný spolubydlící.
+
+My jsme si řekli **DOST**. Rozhodli jsme se vytvořit 25. hodinu tvého dne. Čas, který existuje mimo prostor a hluk běžného světa.
+
+---
+
+### [Sekce 3: ARZENÁL (Naše řešení)]
+
+**[Nadpis]**
+## TVOJE PRODUKTIVITA JAKO SLUŽBA
+
+*(Tři bloky vedle sebe s jednoduchými ikonkami)*
+
+* 🤫 **Zóna absolutního ticha**
+Žádné cinkání nádobí. Žádné hlasité skupinky. Naším hlavním pravidlem je respekt k tvému "flow". U nás uslyšíš jen tichý lo-fi ambient a klapání klávesnic.
+* ⚡ **Infrastruktura bez kompromisů**
+Zapomeň na boj o jednu zástrčku v rohu. Ergonomické sezení stavěné na 4 hodiny práce a Wi-Fi, která nepadá, ani když všichni najednou renderují video.
+* 🧠 **Brain-Food místo fastfoodu**
+Alkohol a těžká jídla zabíjejí mozek. Náš bar míchá prémiovou matchu, yerbu maté, adaptogenní nápoje a podává lehké noční snacky, které tě udrží bdělého, ale nezkazí ti spánek.
+
+---
+
+### [Sekce 4: MANIFEST A RITUÁLY (Budování kultu)]
+
+**[Nadpis]**
+## PRAVIDLA 25. HODINY
+
+*(Design připomínající vytesané desatero)*
+
+1. **Chráníme tvůj klid:** Jsme ochotni nekompromisně vykázat hlučnou skupinu lidí, abychom ochránili tvé soustředění. Ticho je u nás svaté.
+2. **The Submit Bell:** Znáš ten pocit úlevy? Pokud u nás o půlnoci odevzdáš bakalářku nebo klikneš na "Publikovat", zazvoň na barový zvonec. Náš personál ti okamžitě naleje oslavný shot matchy na účet podniku.
+3. **Focus Lockbox:** Chceš se odpojit od sítí? Zamkni si u nás na baru telefon. Pokud vydržíš 2 hodiny offline v čistém soustředění, máš od nás 10% slevu na celý účet.
+
+---
+
+### [Sekce 5: ZÁVĚR & CALL TO ACTION (Footer)]
+
+**[Nadpis]**
+## PŘIPRAV SE NA NOČNÍ SMĚNU.
+
+**[Text]**
+Nebuď sám ve tmě svého pokoje. Přidej se ke komunitě nočních sov, freelancerů a studentů, kteří posouvají Liberec dopředu.
+
+**[Formulářové pole]**
+[ Vlož svůj e-mail ]
+👉 **CHCI BÝT IN (ZAPÍSAT SE NA WAITLIST)**
+
+*(Informace v patičce)*
+📍 **Lokalita:** Liberec (Poblíž kampusu)
+🕒 **Otevírací doba:** 18:00 – 01:00
+📱 **Sleduj náš noční hustle:** [Ikona Instagram] [Ikona TikTok]
+
+---
+
+### 💡 Tip stratéga pro tento web:
+Tento text není jen o slovech, ale o **psychologii**. Místo toho, abyste prosili lidi, ať přijdou na kávu, vy jim dáváte *status*. Dáváte jim pocit, že pokud pracují po večerech, patří do elitní skupiny lidí, o které se 25 Cafe postará. Pokud tento web pustíte na zkouškové období do skupin na TUL s tímto textem, garantuji vám, že vám servery padnou pod náporem registrací.
