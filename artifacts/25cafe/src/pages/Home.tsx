@@ -223,14 +223,14 @@ export default function Home() {
                 label: '01 / COWORKING',
                 title: 'Pracuj, ale nejsi sám.',
                 desc: 'Sdílené stoly, jemný ruch. Ideální pro kolaboraci nebo projekty, při kterých ti pomáhá vědomí ostatních.',
-                image: 'https://images.unsplash.com/photo-1517502884422-41eaead166d4?auto=format&fit=crop&w=800&q=80',
+                image: 'https://images.unsplash.com/photo-1521017432531-fbd92d768814?auto=format&fit=crop&w=800&q=80',
               },
               {
                 id: 'relax',
                 label: '02 / RELAX',
                 title: 'Zpomal. Nikam nespěchej.',
                 desc: 'Měkká křesla, tlumené světlo. Prostor pro čtení, rozhovor nebo prosté bytí.',
-                image: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=800&q=80',
+                image: 'https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&w=800&q=80',
               },
               {
                 id: 'focus',
