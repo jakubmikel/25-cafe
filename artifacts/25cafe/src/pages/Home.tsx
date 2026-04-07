@@ -94,7 +94,6 @@ export default function Home() {
           </div>
         </div>
       </nav>
-
       {/* HERO SECTION */}
       <section className="relative min-h-[100dvh] flex items-center justify-center overflow-hidden pt-20">
         <div className="absolute inset-0 z-0">
@@ -118,7 +117,7 @@ export default function Home() {
               variants={fadeUp}
               src={logoSrc}
               alt="Café 25"
-              className="h-24 w-24 object-contain mb-8 opacity-90"
+              className="h-24 w-24 object-contain mb-8 opacity-90 bg-[#141010de]"
             />
             <motion.h1
               variants={fadeUp}
@@ -160,7 +159,6 @@ export default function Home() {
           <div className="w-[1px] h-16 bg-gradient-to-b from-accent to-transparent animate-pulse" />
         </motion.div>
       </section>
-
       {/* CONCEPT SECTION */}
       <section className="py-32 md:py-48 bg-background relative z-10">
         <div className="container px-6 mx-auto">
@@ -204,7 +202,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
       {/* THREE ZONES SECTION */}
       <section id="zones" className="py-32 md:py-40 bg-secondary relative">
         <div className="container px-6 mx-auto">
@@ -273,7 +270,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
       {/* NIGHT HOURS SECTION */}
       <section className="py-40 bg-background text-center relative flex flex-col items-center justify-center border-y border-border/30">
         <motion.div
@@ -299,7 +295,6 @@ export default function Home() {
           </motion.p>
         </motion.div>
       </section>
-
       {/* MENU SECTION */}
       <section id="menu" className="py-32 md:py-48 bg-secondary">
         <div className="container px-6 mx-auto max-w-4xl">
@@ -385,7 +380,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
       {/* RESERVATION SECTION */}
       <section id="reservation" className="py-32 md:py-48 bg-background border-t border-border/30">
         <div className="container px-6 mx-auto max-w-3xl">
@@ -513,7 +507,6 @@ export default function Home() {
           </motion.form>
         </div>
       </section>
-
       {/* FOOTER */}
       <footer className="bg-secondary pt-24 pb-12 font-sans text-sm">
         <div className="container px-6 mx-auto">
