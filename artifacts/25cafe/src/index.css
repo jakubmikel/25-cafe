@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=Inter:wght@300;400;500&display=swap');
 @import "tailwindcss";
 @import "tw-animate-css";
 @plugin "@tailwindcss/typography";
@@ -41,7 +41,7 @@
   --color-destructive-border: var(--destructive-border);
 
   --font-sans: var(--app-font-sans);
-  --font-serif: var(--app-font-sans);
+  --font-serif: var(--app-font-serif);
   --font-mono: var(--app-font-mono);
 
   --radius-sm: calc(var(--radius) - 4px);
@@ -51,57 +51,58 @@
 }
 
 :root, .dark {
-  /* Dark, timeless, cinematic theme */
+  /* Café 25 Theme */
   --background: 0 0% 5%;
-  --foreground: 32 16% 81%;
+  --foreground: 36 40% 82%;
   
-  --border: 0 0% 15%;
+  --border: 36 10% 15%; /* Subtle warm dark */
   
-  --card: 222 25% 13%;
-  --card-foreground: 32 16% 81%;
-  --card-border: 0 0% 15%;
+  --card: 30 18% 9%; /* Secondary bg */
+  --card-foreground: 36 40% 82%;
+  --card-border: 36 10% 15%;
   
   --popover: 0 0% 5%;
-  --popover-foreground: 32 16% 81%;
-  --popover-border: 0 0% 15%;
+  --popover-foreground: 36 40% 82%;
+  --popover-border: 36 10% 15%;
   
-  --primary: 39 47% 61%;
+  --primary: 36 46% 61%; /* Accent gold */
   --primary-foreground: 0 0% 5%;
   
-  --secondary: 222 25% 13%;
-  --secondary-foreground: 32 16% 81%;
+  --secondary: 30 18% 9%;
+  --secondary-foreground: 36 40% 82%;
   
-  --muted: 222 25% 13%;
-  --muted-foreground: 32 16% 60%;
+  --muted: 30 18% 9%;
+  --muted-foreground: 36 18% 40%; /* Muted text */
   
-  --accent: 39 47% 61%;
+  --accent: 36 46% 61%;
   --accent-foreground: 0 0% 5%;
   
   --destructive: 0 84% 60%;
-  --destructive-foreground: 32 16% 81%;
+  --destructive-foreground: 36 40% 82%;
   
-  --input: 0 0% 15%;
-  --ring: 39 47% 61%;
+  --input: 36 10% 15%;
+  --ring: 36 46% 61%;
   
-  --chart-1: 39 47% 61%;
-  --chart-2: 32 16% 81%;
-  --chart-3: 222 25% 13%;
+  --chart-1: 36 46% 61%;
+  --chart-2: 36 40% 82%;
+  --chart-3: 30 18% 9%;
   --chart-4: 0 0% 15%;
   --chart-5: 0 0% 5%;
 
   --sidebar: 0 0% 5%;
-  --sidebar-foreground: 32 16% 81%;
-  --sidebar-border: 0 0% 15%;
-  --sidebar-primary: 39 47% 61%;
+  --sidebar-foreground: 36 40% 82%;
+  --sidebar-border: 36 10% 15%;
+  --sidebar-primary: 36 46% 61%;
   --sidebar-primary-foreground: 0 0% 5%;
-  --sidebar-accent: 222 25% 13%;
-  --sidebar-accent-foreground: 32 16% 81%;
-  --sidebar-ring: 39 47% 61%;
+  --sidebar-accent: 30 18% 9%;
+  --sidebar-accent-foreground: 36 40% 82%;
+  --sidebar-ring: 36 46% 61%;
 
   --app-font-sans: 'Inter', sans-serif;
+  --app-font-serif: 'Cormorant Garamond', serif;
   --app-font-mono: Menlo, monospace;
   
-  --radius: 0.5rem;
+  --radius: 0; /* Minimalist, no rounded corners */
 }
 
 @layer base {
@@ -109,9 +110,9 @@
     @apply border-border;
   }
   body {
-    @apply font-sans antialiased bg-background text-foreground selection:bg-accent selection:text-accent-foreground;
+    @apply font-sans antialiased bg-background text-foreground selection:bg-accent selection:text-background;
   }
   h1, h2, h3, h4, h5, h6 {
-    @apply font-sans;
+    @apply font-serif;
   }
 }

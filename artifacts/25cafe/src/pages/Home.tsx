@@ -1,221 +1,272 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { MapPin, Clock, Instagram, Moon, Focus, Armchair, Users, ChevronRight } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { MapPin, Clock, Moon, Check, Instagram } from 'lucide-react';
 import { SiTiktok } from 'react-icons/si';
 import logoSrc from '@assets/cafe25-logo-clock_1775582027169.png';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
-  visible: { opacity: 1, y: 0, transition: { duration: 1, ease: [0.25, 0.1, 0.25, 1] } }
+  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.25, 0.1, 0.25, 1] } }
 };
 
 const staggerContainer = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: { staggerChildren: 0.2 }
+    transition: { staggerChildren: 0.15 }
   }
 };
 
+const navLinks = [
+  { name: 'Zóny', href: '#zones' },
+  { name: 'Menu', href: '#menu' },
+  { name: 'Rezervace', href: '#reservation' },
+];
+
 export default function Home() {
-  const [formData, setFormData] = useState({
+  const [scrolled, setScrolled] = useState(false);
+  const [activeTab, setActiveTab] = useState('Káva & Stimulanty');
+  const [formState, setFormState] = useState({
     zone: '',
     date: '',
     time: '',
     guests: '',
     name: '',
-    email: ''
+    email: '',
   });
-  const [submitted, setSubmitted] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 50);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
-    if (!formData.name || !formData.email || !formData.zone) return;
-    setSubmitted(true);
-    setTimeout(() => {
-      setFormData({ zone: '', date: '', time: '', guests: '', name: '', email: '' });
-      setSubmitted(false);
-    }, 5000);
+    const el = document.querySelector(href);
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
   };
 
-  const handleChange = (field: string) => (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement> | string) => {
-    const value = typeof e === 'string' ? e : e.target.value;
-    setFormData(prev => ({ ...prev, [field]: value }));
+  const handleFormChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFormState(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleFormSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitted(true);
+    setTimeout(() => {
+      setIsSubmitted(false);
+      setFormState({ zone: '', date: '', time: '', guests: '', name: '', email: '' });
+    }, 4000);
   };
 
   return (
-    <div className="min-h-screen bg-background text-foreground overflow-hidden font-sans selection:bg-accent selection:text-background">
-      {/* Navigation */}
-      <nav className="fixed top-0 w-full z-50 px-6 sm:px-8 py-4">
-        <div className="container mx-auto flex justify-between items-center">
-          <img src={logoSrc} alt="Café 25" className="h-14 w-14 object-contain" />
-          <div className="text-xs tracking-widest uppercase text-foreground/60 font-medium">
+    <div className="min-h-screen bg-background text-foreground selection:bg-accent selection:text-background">
+      {/* NAVIGATION */}
+      <nav
+        className={`fixed top-0 w-full z-50 transition-all duration-300 border-b border-transparent ${
+          scrolled ? 'bg-[#0D0D0D]/85 backdrop-blur-[20px] border-border/50 shadow-lg' : 'bg-transparent py-4'
+        }`}
+      >
+        <div className="container mx-auto px-6 sm:px-8 h-20 flex items-center justify-between">
+          <a href="#" className="flex-shrink-0" onClick={(e) => handleNavClick(e, 'body')}>
+            <img src={logoSrc} alt="Café 25" className="h-12 w-12 object-contain" />
+          </a>
+          <div className="hidden md:flex items-center gap-8 text-sm uppercase tracking-[0.15em] font-light">
+            {navLinks.map((link) => (
+              <a
+                key={link.name}
+                href={link.href}
+                onClick={(e) => handleNavClick(e, link.href)}
+                className="hover:text-accent transition-colors relative after:absolute after:-bottom-1 after:left-0 after:h-[1px] after:w-0 after:bg-accent hover:after:w-full after:transition-all after:duration-300"
+              >
+                {link.name}
+              </a>
+            ))}
+          </div>
+          <div className="text-sm tracking-[0.2em] font-light text-foreground/80 flex items-center gap-2">
+            <Clock className="w-4 h-4 text-accent hidden sm:block" />
             18:00 — 04:00
           </div>
         </div>
       </nav>
 
-      {/* 1. HERO SECTION */}
-      <section className="relative min-h-[100dvh] flex items-center justify-center overflow-hidden">
+      {/* HERO SECTION */}
+      <section className="relative min-h-[100dvh] flex items-center justify-center overflow-hidden pt-20">
         <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-background/70 mix-blend-multiply z-10" />
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/30 z-20" />
-          <motion.div 
-            animate={{ opacity: [0.6, 0.4, 0.6] }}
-            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute inset-0 bg-accent/5 mix-blend-overlay z-15"
-          />
-          <img 
-            src="https://images.unsplash.com/photo-1559305616-3f99cd43e353?auto=format&fit=crop&w=1920&q=80" 
-            alt="Cinematic night cafe interior" 
-            className="w-full h-full object-cover opacity-80"
+          <div className="absolute inset-0 bg-background/60 z-10" />
+          <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-transparent to-background z-20" />
+          <img
+            src="https://images.unsplash.com/photo-1559305616-3f99cd43e353?auto=format&fit=crop&w=2000&q=80"
+            alt="Night café"
+            className="w-full h-full object-cover opacity-60"
           />
         </div>
 
-        <div className="container relative z-30 px-6">
-          <motion.div 
+        <div className="container relative z-30 px-6 flex flex-col items-center text-center mt-10">
+          <motion.div
             initial="hidden"
             animate="visible"
             variants={staggerContainer}
-            className="max-w-4xl"
+            className="max-w-4xl w-full flex flex-col items-center"
           >
-            <motion.div variants={fadeUp} className="mb-8">
-              <img src={logoSrc} alt="Café 25" className="h-24 w-24 object-contain" />
-            </motion.div>
-            <motion.h1 
+            <motion.img
               variants={fadeUp}
-              className="text-5xl sm:text-6xl md:text-8xl font-black leading-[1.05] tracking-tight mb-8"
+              src={logoSrc}
+              alt="Café 25"
+              className="h-24 w-24 object-contain mb-8 opacity-90"
+            />
+            <motion.h1
+              variants={fadeUp}
+              className="text-6xl sm:text-7xl md:text-[100px] leading-[0.95] tracking-tight mb-8"
             >
               Tvoje místo,<br />
-              <span className="text-accent">když svět zpomalí.</span>
+              <span className="text-accent italic font-light">když svět zpomalí.</span>
             </motion.h1>
-            
-            <motion.div variants={fadeUp} className="flex flex-col sm:flex-row items-start gap-4">
-              <Button size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground rounded-none px-10 py-7 text-sm font-bold tracking-widest uppercase transition-all" onClick={() => document.getElementById('zones')?.scrollIntoView({ behavior: 'smooth' })}>
-                Objev prostor
+            <motion.p
+              variants={fadeUp}
+              className="text-lg md:text-xl font-sans font-light tracking-wide text-foreground/80 mb-12 max-w-xl mx-auto uppercase"
+            >
+              Noční kavárna. Tři prostory. Jedna hodina navíc.
+            </motion.p>
+            <motion.div variants={fadeUp} className="flex flex-col sm:flex-row items-center gap-6 w-full sm:w-auto">
+              <Button
+                className="w-full sm:w-auto bg-accent hover:bg-accent/80 text-background px-12 py-7 rounded-none uppercase tracking-widest text-sm font-medium transition-all"
+                onClick={(e) => handleNavClick(e as any, '#zones')}
+              >
+                Objev prostory
               </Button>
-              <Button size="lg" variant="outline" className="border-foreground/20 hover:border-accent hover:bg-transparent rounded-none px-10 py-7 text-sm font-bold tracking-widest uppercase transition-all" onClick={() => document.getElementById('reservation')?.scrollIntoView({ behavior: 'smooth' })}>
+              <Button
+                variant="outline"
+                className="w-full sm:w-auto border-foreground hover:bg-foreground hover:text-background px-12 py-7 rounded-none uppercase tracking-widest text-sm font-medium transition-all"
+                onClick={(e) => handleNavClick(e as any, '#reservation')}
+              >
                 Rezervace
               </Button>
             </motion.div>
           </motion.div>
         </div>
+
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.5, duration: 1 }}
+          className="absolute bottom-10 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-2"
+        >
+          <div className="w-[1px] h-16 bg-gradient-to-b from-accent to-transparent animate-pulse" />
+        </motion.div>
       </section>
 
-      {/* 2. CONCEPT SECTION */}
-      <section className="py-32 relative bg-background">
+      {/* CONCEPT SECTION */}
+      <section className="py-32 md:py-48 bg-background relative z-10">
         <div className="container px-6 mx-auto">
-          <div className="grid lg:grid-cols-2 gap-20 items-center">
-            <motion.div 
+          <div className="grid lg:grid-cols-2 gap-16 lg:gap-32 items-center">
+            <motion.div
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, margin: "-100px" }}
               variants={staggerContainer}
-              className="space-y-12"
+              className="space-y-10"
             >
-              <motion.h2 variants={fadeUp} className="text-3xl md:text-5xl font-bold leading-tight tracking-tight">
-                Útěk z denního chaosu.
+              <motion.h2 variants={fadeUp} className="text-5xl md:text-7xl font-semibold leading-tight">
+                Jiný čas.<br />Jiné tempo.
               </motion.h2>
-              <motion.div variants={fadeUp} className="space-y-8 text-lg md:text-xl text-foreground/70 font-light leading-relaxed">
+              <motion.div variants={fadeUp} className="space-y-6 font-sans font-light text-lg md:text-xl text-foreground/80 leading-relaxed">
                 <p>
-                  Jsme noční režim ve fyzické podobě. Místo, kde čas plyne jinak a kde tě nikdo neruší.
+                  Jsme noční režim ve fyzické podobě. Místo, kde čas plyne jinak a kde tě nikdo neruší. Když město utichne, my začínáme.
                 </p>
                 <p>
-                  Vytvořili jsme prostor, který respektuje tvoji potřebu pracovat, tvořit nebo jen tiše existovat, když zbytek města spí. Zde nenajdeš polední shon ani cinkání lžiček o hrneček.
+                  Vytvořili jsme prostor, který respektuje tvoji potřebu pracovat, tvořit nebo jen tiše existovat. Žádný ranní shon, žádné cinkání lžiček. Jen ty, tvé myšlenky a perfektní káva.
                 </p>
-                <p className="text-accent font-medium">
-                  Vyber si, jak chceš fungovat.
+                <p className="text-accent uppercase tracking-widest text-sm pt-4 font-medium">
+                  Tři zóny. Tři způsoby bytí.
                 </p>
               </motion.div>
             </motion.div>
-            <motion.div 
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 1.2, ease: "easeOut" }}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 1, ease: "easeOut" }}
               viewport={{ once: true }}
-              className="relative h-[600px] w-full"
+              className="relative aspect-[4/5] w-full max-w-md mx-auto lg:max-w-none"
             >
-              <img src="https://images.unsplash.com/photo-1516979187457-637abb4f9353?auto=format&fit=crop&w=1200&q=80" alt="Warm lamp light studying" className="w-full h-full object-cover opacity-80" />
-              <div className="absolute inset-0 bg-gradient-to-t from-background to-transparent" />
+              <img
+                src="https://images.unsplash.com/photo-1516979187457-637abb4f9353?auto=format&fit=crop&w=1000&q=80"
+                alt="Atmospheric light"
+                className="w-full h-full object-cover grayscale-[20%]"
+              />
+              <div className="absolute inset-0 ring-1 ring-inset ring-foreground/10 pointer-events-none" />
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* 3. THREE ZONES SECTION */}
-      <section id="zones" className="py-32 bg-secondary relative overflow-hidden">
-        <div className="container px-6 mx-auto relative z-10">
-          <motion.div 
+      {/* THREE ZONES SECTION */}
+      <section id="zones" className="py-32 md:py-40 bg-secondary relative">
+        <div className="container px-6 mx-auto">
+          <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
             variants={fadeUp}
-            className="mb-20"
+            className="text-center mb-24"
           >
-            <h2 className="text-xs tracking-[0.2em] text-accent font-bold uppercase mb-4">Prostory</h2>
-            <h3 className="text-4xl md:text-5xl font-bold tracking-tight">Zvol svůj mód.</h3>
+            <h2 className="text-5xl md:text-7xl font-semibold">Zvol svůj prostor.</h2>
+            <div className="w-16 h-[1px] bg-accent mx-auto mt-8" />
           </motion.div>
 
-          <div className="grid lg:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-3 gap-8 md:gap-6 lg:gap-12">
             {[
               {
                 id: 'coworking',
-                icon: Users,
-                title: "COWORKING",
-                subtitle: "Pracuj, ale nejsi sám.",
-                desc: "Sdílené stoly, lehká a živá atmosféra. Ideální pro kolaboraci nebo práci, při které ti pomáhá jemný ruch okolí.",
-                image: "https://images.unsplash.com/photo-1517502884422-41eaead166d4?auto=format&fit=crop&w=800&q=80",
-                glowColor: "rgba(201, 169, 110, 0.15)"
+                label: '01 / COWORKING',
+                title: 'Pracuj, ale nejsi sám.',
+                desc: 'Sdílené stoly, jemný ruch. Ideální pro kolaboraci nebo projekty, při kterých ti pomáhá vědomí ostatních.',
+                image: 'https://images.unsplash.com/photo-1517502884422-41eaead166d4?auto=format&fit=crop&w=800&q=80',
               },
               {
                 id: 'relax',
-                icon: Armchair,
-                title: "RELAX",
-                subtitle: "Zpomal. Nikam nespěchej.",
-                desc: "Měkké sezení, tlumené světlo. Zóna bez stresu pro čtení, rozhovor nebo prosté odpojení po dlouhém dni.",
-                image: "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=800&q=80",
-                glowColor: "rgba(201, 169, 110, 0.1)"
+                label: '02 / RELAX',
+                title: 'Zpomal. Nikam nespěchej.',
+                desc: 'Měkká křesla, tlumené světlo. Prostor pro čtení, rozhovor nebo prosté bytí.',
+                image: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=800&q=80',
               },
               {
                 id: 'focus',
-                icon: Focus,
-                title: "FOCUS",
-                subtitle: "Deep work mode.",
-                desc: "Absolutní ticho. Individuální kóje, kde tě nebudou rušit pohledy ani zvuky. Čistá koncentrace.",
-                image: "https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=800&q=80",
-                glowColor: "rgba(201, 169, 110, 0.25)"
+                label: '03 / FOCUS',
+                title: 'Deep work mode.',
+                desc: 'Absolutní ticho. Individuální místo s notebookem, kde přijdou nejlepší nápady.',
+                image: 'https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=800&q=80',
               }
             ].map((zone, i) => (
-              <motion.div 
+              <motion.div
                 key={zone.id}
-                initial={{ opacity: 0, y: 50 }}
+                initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: i * 0.2 }}
-                className="group relative bg-background border border-border overflow-hidden cursor-pointer transition-all duration-700"
-                style={{ '--hover-glow': zone.glowColor } as React.CSSProperties}
+                transition={{ duration: 0.7, delay: i * 0.15 }}
+                className="group relative flex flex-col bg-background h-[600px] overflow-hidden cursor-pointer"
               >
-                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
-                     style={{ boxShadow: `inset 0 0 80px var(--hover-glow)` }} />
-                
-                <div className="h-64 overflow-hidden relative">
-                  <div className="absolute inset-0 bg-background/40 group-hover:bg-background/20 transition-colors duration-700 z-10" />
-                  <img src={zone.image} alt={zone.title} className="w-full h-full object-cover scale-100 group-hover:scale-105 transition-transform duration-1000 ease-out grayscale-[30%] group-hover:grayscale-0" />
+                <div className="h-[60%] w-full relative overflow-hidden">
+                  <div className="absolute inset-0 bg-background/20 group-hover:bg-transparent transition-colors duration-500 z-10" />
+                  <img
+                    src={zone.image}
+                    alt={zone.title}
+                    className="w-full h-full object-cover transition-all duration-700 group-hover:scale-105 group-hover:brightness-110 grayscale-[30%] group-hover:grayscale-0"
+                  />
                 </div>
-                
-                <div className="p-10 relative z-20">
-                  <div className="flex justify-between items-center mb-6">
-                    <h4 className="text-xl font-bold tracking-widest text-accent">{zone.title}</h4>
-                    <zone.icon className="w-6 h-6 text-foreground/30 group-hover:text-accent transition-colors duration-500" />
+                <div className="p-8 lg:p-10 flex-1 flex flex-col justify-center border-l-2 border-transparent group-hover:border-accent transition-all duration-300 relative bg-background z-20 group-hover:-translate-y-2">
+                  <div className="text-accent font-sans text-xs tracking-[0.2em] mb-4">
+                    {zone.label}
                   </div>
-                  <p className="text-2xl font-semibold mb-4 tracking-tight">{zone.subtitle}</p>
-                  <p className="text-foreground/60 font-light leading-relaxed">{zone.desc}</p>
-                  
-                  <div className="mt-8 flex items-center text-sm font-bold uppercase tracking-widest text-foreground/40 group-hover:text-accent transition-colors duration-500">
-                    Rezervovat <ChevronRight className="w-4 h-4 ml-2" />
-                  </div>
+                  <h3 className="text-3xl lg:text-4xl mb-4 leading-tight">{zone.title}</h3>
+                  <p className="font-sans font-light text-sm lg:text-base text-foreground/70 leading-relaxed">
+                    {zone.desc}
+                  </p>
                 </div>
               </motion.div>
             ))}
@@ -223,230 +274,294 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 4. NIGHT MODE SECTION */}
-      <section className="py-40 bg-background relative border-y border-border/50">
-        <motion.div 
-          animate={{ opacity: [0.02, 0.05, 0.02] }}
-          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute inset-0 opacity-20 pointer-events-none mix-blend-overlay bg-[radial-gradient(ellipse_at_center,_rgba(201,169,110,0.05)_0%,_transparent_70%)]"
-        />
-        <div className="container px-6 mx-auto text-center max-w-3xl relative z-10">
+      {/* NIGHT HOURS SECTION */}
+      <section className="py-40 bg-background text-center relative flex flex-col items-center justify-center border-y border-border/30">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={staggerContainer}
+          className="container px-6 flex flex-col items-center"
+        >
+          <motion.div variants={fadeUp} className="mb-10">
+            <motion.div
+              animate={{ opacity: [0.5, 1, 0.5], scale: [0.95, 1.05, 0.95] }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+            >
+              <Moon className="w-16 h-16 text-accent mx-auto" strokeWidth={1} />
+            </motion.div>
+          </motion.div>
+          <motion.h2 variants={fadeUp} className="text-6xl md:text-8xl font-serif tracking-widest text-foreground font-light mb-8">
+            18:00 — 04:00
+          </motion.h2>
+          <motion.p variants={fadeUp} className="font-sans font-light text-xl md:text-2xl text-foreground/60 max-w-2xl">
+            Zatímco se město ukládá ke spánku, my roztáčíme kávovar.
+          </motion.p>
+        </motion.div>
+      </section>
+
+      {/* MENU SECTION */}
+      <section id="menu" className="py-32 md:py-48 bg-secondary">
+        <div className="container px-6 mx-auto max-w-4xl">
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            variants={staggerContainer}
-          >
-            <motion.div variants={fadeUp} className="flex justify-center mb-8">
-              <Moon className="w-12 h-12 text-accent" strokeWidth={1} />
-            </motion.div>
-            <motion.h2 variants={fadeUp} className="text-4xl md:text-6xl font-bold mb-8 tracking-tight">
-              Jiná energie.
-            </motion.h2>
-            <motion.p variants={fadeUp} className="text-xl text-foreground/70 font-light leading-relaxed mb-12">
-              Zatímco se město ukládá ke spánku, my roztáčíme kávovar a tlumíme světla. Noc přináší soustředění, které přes den nenajdeš. Žádné rozptýlení, jen ty a tvé myšlenky.
-            </motion.p>
-            <motion.div variants={fadeUp} className="inline-block border border-accent/30 bg-accent/5 px-12 py-6 text-center">
-              <div className="text-sm tracking-[0.2em] text-accent font-bold uppercase mb-2">Otevírací doba</div>
-              <div className="text-4xl font-bold tracking-tight">18:00 – 04:00</div>
-            </motion.div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* 5. MENU SECTION */}
-      <section className="py-32 bg-secondary relative">
-        <div className="container px-6 mx-auto max-w-5xl">
-          <motion.div 
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
             variants={fadeUp}
-            className="mb-20 text-center"
+            className="text-center mb-20"
           >
-             <h3 className="text-4xl font-bold tracking-tight">Menu</h3>
-             <p className="mt-4 text-foreground/60 font-light">Kvalita nad kvantitou. Palivo pro tvou noc.</p>
+            <h2 className="text-5xl md:text-7xl font-semibold mb-6">Menu</h2>
+            <div className="w-16 h-[1px] bg-accent mx-auto" />
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-16">
-            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-              <h4 className="text-xl font-bold text-accent mb-8 tracking-widest uppercase border-b border-border pb-4">Káva & Stimulanty</h4>
-              <ul className="space-y-6">
-                <li className="flex justify-between items-baseline"><span className="text-lg">Cold Brew</span><span className="text-foreground/50 text-sm">95 CZK</span></li>
-                <li className="flex justify-between items-baseline"><span className="text-lg">Ceremonial Matcha</span><span className="text-foreground/50 text-sm">115 CZK</span></li>
-                <li className="flex justify-between items-baseline"><span className="text-lg">Yerba Maté Shot</span><span className="text-foreground/50 text-sm">85 CZK</span></li>
-                <li className="flex justify-between items-baseline"><span className="text-lg">V60 Filter</span><span className="text-foreground/50 text-sm">105 CZK</span></li>
-              </ul>
-            </motion.div>
+          <div className="flex flex-wrap justify-center gap-4 md:gap-12 mb-16 font-sans text-sm md:text-base uppercase tracking-widest">
+            {['Káva & Stimulanty', 'Jídlo', 'Noční snacky'].map((tab) => (
+              <button
+                key={tab}
+                onClick={() => setActiveTab(tab)}
+                className={`pb-2 transition-all relative ${
+                  activeTab === tab ? 'text-accent' : 'text-foreground/50 hover:text-foreground'
+                }`}
+              >
+                {tab}
+                {activeTab === tab && (
+                  <motion.div
+                    layoutId="activeTabIndicator"
+                    className="absolute bottom-0 left-0 right-0 h-[1px] bg-accent"
+                  />
+                )}
+              </button>
+            ))}
+          </div>
 
-            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }}>
-              <h4 className="text-xl font-bold text-accent mb-8 tracking-widest uppercase border-b border-border pb-4">Malé jídlo</h4>
-              <ul className="space-y-6">
-                <li className="flex justify-between items-baseline"><span className="text-lg">Avocado Toast</span><span className="text-foreground/50 text-sm">165 CZK</span></li>
-                <li className="flex justify-between items-baseline"><span className="text-lg">Grilled Cheese</span><span className="text-foreground/50 text-sm">145 CZK</span></li>
-                <li className="flex justify-between items-baseline"><span className="text-lg">Overnight Oats</span><span className="text-foreground/50 text-sm">125 CZK</span></li>
-              </ul>
-            </motion.div>
-
-            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }}>
-              <h4 className="text-xl font-bold text-accent mb-8 tracking-widest uppercase border-b border-border pb-4">Noční snacky</h4>
-              <ul className="space-y-6">
-                <li className="flex justify-between items-baseline"><span className="text-lg">Energy Bites (3ks)</span><span className="text-foreground/50 text-sm">85 CZK</span></li>
-                <li className="flex justify-between items-baseline"><span className="text-lg">Dark Chocolate 80%</span><span className="text-foreground/50 text-sm">95 CZK</span></li>
-                <li className="flex justify-between items-baseline"><span className="text-lg">Almonds & Walnuts</span><span className="text-foreground/50 text-sm">75 CZK</span></li>
-              </ul>
-            </motion.div>
+          <div className="min-h-[400px]">
+            <AnimatePresence mode="wait">
+              {activeTab === 'Káva & Stimulanty' && (
+                <motion.div
+                  key="kava"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.3 }}
+                  className="grid md:grid-cols-2 gap-x-20 gap-y-8 font-sans"
+                >
+                  <MenuItem name="Cold Brew" price="95" />
+                  <MenuItem name="Ceremonial Matcha" price="115" />
+                  <MenuItem name="Yerba Maté Shot" price="85" />
+                  <MenuItem name="V60 Filter" price="105" />
+                  <MenuItem name="Espresso" price="75" />
+                  <MenuItem name="Cappuccino" price="85" />
+                </motion.div>
+              )}
+              {activeTab === 'Jídlo' && (
+                <motion.div
+                  key="jidlo"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.3 }}
+                  className="grid md:grid-cols-2 gap-x-20 gap-y-8 font-sans"
+                >
+                  <MenuItem name="Avocado Toast" price="165" />
+                  <MenuItem name="Grilled Cheese" price="145" />
+                  <MenuItem name="Overnight Oats" price="125" />
+                </motion.div>
+              )}
+              {activeTab === 'Noční snacky' && (
+                <motion.div
+                  key="snacky"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.3 }}
+                  className="grid md:grid-cols-2 gap-x-20 gap-y-8 font-sans"
+                >
+                  <MenuItem name="Energy Bites" price="85" />
+                  <MenuItem name="Dark Chocolate 80%" price="95" />
+                  <MenuItem name="Mixed Nuts" price="75" />
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
         </div>
       </section>
 
-      {/* 6. RESERVATION SECTION */}
-      <section id="reservation" className="py-32 bg-background border-t border-border relative">
-        <div className="container px-6 mx-auto max-w-2xl">
+      {/* RESERVATION SECTION */}
+      <section id="reservation" className="py-32 md:py-48 bg-background border-t border-border/30">
+        <div className="container px-6 mx-auto max-w-3xl">
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
             variants={fadeUp}
-            className="text-center mb-16"
+            className="text-center mb-20"
           >
-            <h2 className="text-4xl font-bold mb-4 tracking-tight">Rezervace místa</h2>
-            <p className="text-foreground/60 font-light">Zajisti si svůj stůl předem. Kapacita je omezená.</p>
+            <h2 className="text-5xl md:text-7xl font-semibold mb-6">Rezervace</h2>
+            <p className="font-sans text-foreground/60 font-light max-w-md mx-auto">
+              Prostor je omezený, soustředění nikoliv. Zajisti si své místo na dnešní noc.
+            </p>
           </motion.div>
 
-          <motion.form 
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
+          <motion.form
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            onSubmit={handleSubmit} 
-            className="space-y-8"
+            transition={{ duration: 0.8 }}
+            onSubmit={handleFormSubmit}
+            className="space-y-12 font-sans"
           >
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
-              <div className="space-y-2">
-                <label className="text-xs uppercase tracking-widest text-foreground/50 font-bold">Zóna</label>
-                <select
-                  value={formData.zone}
-                  onChange={handleChange('zone')}
-                  className="w-full bg-transparent border-0 border-b border-border rounded-none px-0 h-12 text-lg text-foreground focus:outline-none focus:border-accent appearance-none cursor-pointer"
-                >
-                  <option value="" disabled className="bg-background text-foreground/50">Vyber zónu</option>
-                  <option value="coworking" className="bg-background text-foreground">Coworking</option>
-                  <option value="relax" className="bg-background text-foreground">Relax</option>
-                  <option value="focus" className="bg-background text-foreground">Focus</option>
-                </select>
+            <div className="grid md:grid-cols-2 gap-x-12 gap-y-10">
+              <div className="space-y-4">
+                <label className="text-xs uppercase tracking-[0.15em] text-foreground/50">Zóna</label>
+                <div className="relative">
+                  <select
+                    name="zone"
+                    value={formState.zone}
+                    onChange={handleFormChange}
+                    required
+                    className="w-full bg-transparent border-0 border-b border-border/50 pb-3 text-lg focus:ring-0 focus:border-accent outline-none appearance-none cursor-pointer rounded-none"
+                  >
+                    <option value="" disabled className="bg-background text-foreground/50">Vyberte prostor</option>
+                    <option value="coworking" className="bg-background">Coworking</option>
+                    <option value="relax" className="bg-background">Relax</option>
+                    <option value="focus" className="bg-background">Focus</option>
+                  </select>
+                </div>
               </div>
-              <div className="space-y-2">
-                <label className="text-xs uppercase tracking-widest text-foreground/50 font-bold">Počet osob</label>
-                <Input 
-                  type="number" 
-                  min="1" 
-                  max="6"
-                  placeholder="Např. 2"
-                  value={formData.guests}
-                  onChange={handleChange('guests')}
-                  className="bg-transparent border-0 border-b border-border rounded-none px-0 h-12 text-lg focus-visible:ring-0 focus-visible:border-accent"
-                />
-              </div>
-              <div className="space-y-2">
-                <label className="text-xs uppercase tracking-widest text-foreground/50 font-bold">Datum</label>
-                <Input 
-                  type="date" 
-                  value={formData.date}
-                  onChange={handleChange('date')}
-                  className="bg-transparent border-0 border-b border-border rounded-none px-0 h-12 text-lg focus-visible:ring-0 focus-visible:border-accent"
-                />
-              </div>
-              <div className="space-y-2">
-                <label className="text-xs uppercase tracking-widest text-foreground/50 font-bold">Čas příchodu</label>
-                <Input 
-                  type="time" 
-                  value={formData.time}
-                  onChange={handleChange('time')}
-                  className="bg-transparent border-0 border-b border-border rounded-none px-0 h-12 text-lg focus-visible:ring-0 focus-visible:border-accent"
-                />
-              </div>
-              <div className="space-y-2 sm:col-span-2">
-                <label className="text-xs uppercase tracking-widest text-foreground/50 font-bold">Jméno</label>
-                <Input 
-                  type="text" 
+
+              <div className="space-y-4">
+                <label className="text-xs uppercase tracking-[0.15em] text-foreground/50">Datum</label>
+                <Input
+                  type="date"
+                  name="date"
+                  value={formState.date}
+                  onChange={handleFormChange}
                   required
-                  placeholder="Tvé jméno"
-                  value={formData.name}
-                  onChange={handleChange('name')}
-                  className="bg-transparent border-0 border-b border-border rounded-none px-0 h-12 text-lg focus-visible:ring-0 focus-visible:border-accent"
+                  className="bg-transparent border-0 border-b border-border/50 pb-3 text-lg focus-visible:ring-0 focus-visible:border-accent rounded-none px-0"
                 />
               </div>
-              <div className="space-y-2 sm:col-span-2">
-                <label className="text-xs uppercase tracking-widest text-foreground/50 font-bold">Email</label>
-                <Input 
-                  type="email" 
+
+              <div className="space-y-4">
+                <label className="text-xs uppercase tracking-[0.15em] text-foreground/50">Čas</label>
+                <Input
+                  type="time"
+                  name="time"
+                  min="18:00"
+                  max="04:00"
+                  value={formState.time}
+                  onChange={handleFormChange}
                   required
-                  placeholder="pro potvrzení"
-                  value={formData.email}
-                  onChange={handleChange('email')}
-                  className="bg-transparent border-0 border-b border-border rounded-none px-0 h-12 text-lg focus-visible:ring-0 focus-visible:border-accent"
+                  className="bg-transparent border-0 border-b border-border/50 pb-3 text-lg focus-visible:ring-0 focus-visible:border-accent rounded-none px-0"
+                />
+              </div>
+
+              <div className="space-y-4">
+                <label className="text-xs uppercase tracking-[0.15em] text-foreground/50">Osob</label>
+                <Input
+                  type="number"
+                  name="guests"
+                  min="1"
+                  max="8"
+                  placeholder="Počet hostů"
+                  value={formState.guests}
+                  onChange={handleFormChange}
+                  required
+                  className="bg-transparent border-0 border-b border-border/50 pb-3 text-lg focus-visible:ring-0 focus-visible:border-accent rounded-none px-0"
+                />
+              </div>
+
+              <div className="space-y-4 md:col-span-2">
+                <label className="text-xs uppercase tracking-[0.15em] text-foreground/50">Jméno</label>
+                <Input
+                  type="text"
+                  name="name"
+                  placeholder="Jak vás máme oslovit?"
+                  value={formState.name}
+                  onChange={handleFormChange}
+                  required
+                  className="bg-transparent border-0 border-b border-border/50 pb-3 text-lg focus-visible:ring-0 focus-visible:border-accent rounded-none px-0"
+                />
+              </div>
+
+              <div className="space-y-4 md:col-span-2">
+                <label className="text-xs uppercase tracking-[0.15em] text-foreground/50">E-mail</label>
+                <Input
+                  type="email"
+                  name="email"
+                  placeholder="Kam pošleme potvrzení?"
+                  value={formState.email}
+                  onChange={handleFormChange}
+                  required
+                  className="bg-transparent border-0 border-b border-border/50 pb-3 text-lg focus-visible:ring-0 focus-visible:border-accent rounded-none px-0"
                 />
               </div>
             </div>
 
-            <div className="pt-8">
-              <Button type="submit" size="lg" className="w-full bg-accent hover:bg-accent/90 text-accent-foreground rounded-none h-16 text-sm font-bold tracking-widest uppercase transition-all">
-                {submitted ? 'Rezervace přijata' : 'Potvrdit rezervaci'}
-              </Button>
-            </div>
-            
-            {submitted && (
-              <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-accent text-center font-medium mt-4">
-                Děkujeme. Potvrzení jsme odeslali na email.
-              </motion.p>
-            )}
+            <Button
+              type="submit"
+              disabled={isSubmitted}
+              className="w-full bg-accent hover:bg-accent/80 text-background py-8 rounded-none text-sm tracking-widest uppercase transition-all flex items-center justify-center gap-3 font-medium"
+            >
+              {isSubmitted ? (
+                <>
+                  <Check className="w-5 h-5" /> Rezervace potvrzena
+                </>
+              ) : (
+                'Odeslat rezervaci'
+              )}
+            </Button>
           </motion.form>
         </div>
       </section>
 
-      {/* 7. FOOTER */}
-      <footer className="bg-background py-16 border-t border-border">
+      {/* FOOTER */}
+      <footer className="bg-secondary pt-24 pb-12 font-sans text-sm">
         <div className="container px-6 mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-12 text-sm text-foreground/50 font-light">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-16 mb-20">
             <div className="md:col-span-2">
-              <img src={logoSrc} alt="Café 25" className="h-20 w-20 object-contain mb-4" />
-              <p className="max-w-xs leading-relaxed">
-                Noční deep-work azyl. Místo, kde čas plyne jinak.
-              </p>
-            </div>
-            
-            <div>
-              <h5 className="font-bold text-foreground mb-6 uppercase tracking-widest text-xs">Kontakt</h5>
-              <ul className="space-y-4">
-                <li className="flex items-start gap-3">
-                  <MapPin className="w-4 h-4 mt-0.5 text-accent" />
-                  <span>Liberec<br/>Poblíž kampusu</span>
-                </li>
-                <li className="flex items-center gap-3">
-                  <Clock className="w-4 h-4 text-accent" />
-                  <span>18:00 – 04:00</span>
-                </li>
-                <li>
-                  <a href="mailto:hello@cafe25.cz" className="hover:text-accent transition-colors">hello@cafe25.cz</a>
-                </li>
-              </ul>
+              <img src={logoSrc} alt="Café 25" className="h-20 w-20 object-contain mb-8 opacity-80" />
+              <p className="font-serif text-2xl lg:text-3xl text-foreground mb-4">Noční deep-work azyl.</p>
+              <p className="text-foreground/50 max-w-sm font-light">Místo pro ty, kteří nacházejí inspiraci až když se setmí.</p>
             </div>
 
-            <div>
-              <h5 className="font-bold text-foreground mb-6 uppercase tracking-widest text-xs">Sledujte nás</h5>
-              <div className="flex gap-6">
-                <a href="#" className="hover:text-accent transition-colors"><Instagram className="w-5 h-5" /></a>
-                <a href="#" className="hover:text-accent transition-colors"><SiTiktok className="w-5 h-5" /></a>
+            <div className="space-y-6">
+              <div className="flex flex-col gap-2 text-foreground/70 font-light">
+                <span className="text-foreground font-medium mb-2 uppercase tracking-widest text-xs">Lokace</span>
+                <span className="flex items-center gap-2"><MapPin className="w-4 h-4 text-accent" /> Liberec, Poblíž kampusu</span>
+                <span className="flex items-center gap-2"><Clock className="w-4 h-4 text-accent" /> 18:00 – 04:00</span>
+              </div>
+            </div>
+
+            <div className="space-y-6">
+              <div className="flex flex-col gap-2 text-foreground/70 font-light">
+                <span className="text-foreground font-medium mb-2 uppercase tracking-widest text-xs">Kontakt</span>
+                <a href="mailto:hello@cafe25.cz" className="hover:text-accent transition-colors">hello@cafe25.cz</a>
+                <div className="flex items-center gap-4 mt-4">
+                  <a href="#" className="hover:text-accent transition-colors"><Instagram className="w-5 h-5" /></a>
+                  <a href="#" className="hover:text-accent transition-colors"><SiTiktok className="w-4 h-4" /></a>
+                </div>
               </div>
             </div>
           </div>
-          
-          <div className="mt-16 pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-medium uppercase tracking-widest text-foreground/30">
-            <span>© 2025 Café 25 — Liberec</span>
-            <span>The night belongs to you.</span>
+
+          <div className="border-t border-border/30 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-foreground/40 text-xs tracking-widest uppercase font-light">
+            <p>© 2025 Café 25 — Liberec</p>
+            <p>The night belongs to you.</p>
           </div>
         </div>
       </footer>
+    </div>
+  );
+}
+
+function MenuItem({ name, price }: { name: string; price: string }) {
+  return (
+    <div className="flex items-end justify-between gap-4 group">
+      <div className="flex-1 relative">
+        <span className="text-lg text-foreground pr-4 relative bg-secondary z-10">{name}</span>
+        <div className="absolute bottom-1.5 left-0 w-full h-[1px] bg-border/40 group-hover:bg-accent/40 transition-colors" />
+      </div>
+      <span className="text-foreground/60">{price} <span className="text-xs">CZK</span></span>
     </div>
   );
 }
