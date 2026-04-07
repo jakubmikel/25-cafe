@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { MapPin, Clock, Instagram, Moon, Focus, Armchair, Users, ChevronRight } from 'lucide-react';
 import { SiTiktok } from 'react-icons/si';
+import logoSrc from '@assets/cafe25-logo-clock_1775582027169.png';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
@@ -47,12 +48,10 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-background text-foreground overflow-hidden font-sans selection:bg-accent selection:text-background">
       {/* Navigation */}
-      <nav className="fixed top-0 w-full z-50 p-6 sm:p-8 mix-blend-difference">
+      <nav className="fixed top-0 w-full z-50 px-6 sm:px-8 py-4">
         <div className="container mx-auto flex justify-between items-center">
-          <div className="font-bold text-2xl tracking-tighter text-foreground">
-            Café 25<span className="text-accent">.</span>
-          </div>
-          <div className="text-xs tracking-widest uppercase text-foreground/80 font-medium">
+          <img src={logoSrc} alt="Café 25" className="h-14 w-14 object-contain" />
+          <div className="text-xs tracking-widest uppercase text-foreground/60 font-medium">
             18:00 — 04:00
           </div>
         </div>
@@ -82,6 +81,9 @@ export default function Home() {
             variants={staggerContainer}
             className="max-w-4xl"
           >
+            <motion.div variants={fadeUp} className="mb-8">
+              <img src={logoSrc} alt="Café 25" className="h-24 w-24 object-contain" />
+            </motion.div>
             <motion.h1 
               variants={fadeUp}
               className="text-5xl sm:text-6xl md:text-8xl font-black leading-[1.05] tracking-tight mb-8"
@@ -407,9 +409,7 @@ export default function Home() {
         <div className="container px-6 mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-12 text-sm text-foreground/50 font-light">
             <div className="md:col-span-2">
-              <div className="font-bold text-2xl tracking-tighter text-foreground mb-6">
-                Café 25<span className="text-accent">.</span>
-              </div>
+              <img src={logoSrc} alt="Café 25" className="h-20 w-20 object-contain mb-4" />
               <p className="max-w-xs leading-relaxed">
                 Noční deep-work azyl. Místo, kde čas plyne jinak.
               </p>
@@ -442,7 +442,7 @@ export default function Home() {
           </div>
           
           <div className="mt-16 pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-medium uppercase tracking-widest text-foreground/30">
-            <span>© 2025 Café 25</span>
+            <span>© 2025 Café 25 — Liberec</span>
             <span>The night belongs to you.</span>
           </div>
         </div>
