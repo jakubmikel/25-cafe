@@ -164,7 +164,7 @@ export default function Home() {
                 title: "COWORKING",
                 subtitle: "Pracuj, ale nejsi sám.",
                 desc: "Sdílené stoly, lehká a živá atmosféra. Ideální pro kolaboraci nebo práci, při které ti pomáhá jemný ruch okolí.",
-                image: "https://images.unsplash.com/photo-1453614512568-c4024d13c247?auto=format&fit=crop&w=800&q=80",
+                image: "https://images.unsplash.com/photo-1517502884422-41eaead166d4?auto=format&fit=crop&w=800&q=80",
                 glowColor: "rgba(201, 169, 110, 0.15)"
               },
               {
@@ -173,7 +173,7 @@ export default function Home() {
                 title: "RELAX",
                 subtitle: "Zpomal. Nikam nespěchej.",
                 desc: "Měkké sezení, tlumené světlo. Zóna bez stresu pro čtení, rozhovor nebo prosté odpojení po dlouhém dni.",
-                image: "https://images.unsplash.com/photo-1445116572660-236099ec97a0?auto=format&fit=crop&w=800&q=80",
+                image: "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=800&q=80",
                 glowColor: "rgba(201, 169, 110, 0.1)"
               },
               {
@@ -182,7 +182,7 @@ export default function Home() {
                 title: "FOCUS",
                 subtitle: "Deep work mode.",
                 desc: "Absolutní ticho. Individuální kóje, kde tě nebudou rušit pohledy ani zvuky. Čistá koncentrace.",
-                image: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=800&q=80",
+                image: "https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=800&q=80",
                 glowColor: "rgba(201, 169, 110, 0.25)"
               }
             ].map((zone, i) => (
