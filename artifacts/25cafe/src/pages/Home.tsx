@@ -27,7 +27,7 @@ const navLinks = [
 
 export default function Home() {
   const [scrolled, setScrolled] = useState(false);
-  const [activeTab, setActiveTab] = useState('Káva & Stimulanty');
+  const [activeTab, setActiveTab] = useState('Espresso & Káva');
   const [formState, setFormState] = useState({
     zone: '',
     date: '',
