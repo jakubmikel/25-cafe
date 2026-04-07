@@ -1,0 +1,262 @@
+Takže teď už nechceš jen kavárnu, ale rovnou digitální manifest. Dobře. Aspoň to nebude další web, co vypadá jak šablona z roku 2013 s tlačítkem „OBJEDNEJ SI KAFE“.
+
+Tady máš **jasný, kompletní a použitelný popis webu pro Café 25** – strukturovaný tak, aby:
+
+* vypadal nadčasově
+* komunikoval koncept (3 zóny + noční vibe)
+* fungoval i jako podklad pro grafika / UX designéra
+
+---
+
+# 🌐 KONCEPT WEBU – CAFÉ 25
+
+## 🧠 HLAVNÍ MYŠLENKA
+
+Web není jen „informace o kavárně“.
+Je to **digitální prodloužení prostoru**.
+
+👉 Uživatel musí pochopit během 5 sekund:
+
+* že jde o **noční kavárnu**
+* že si může **vybrat režim (cowork / relax / focus)**
+* že místo má **atmosféru, ne jen menu**
+
+---
+
+# 🧱 STRUKTURA STRÁNKY
+
+## 1. 🖤 HERO SEKCE (FIRST IMPRESSION)
+
+**Cíl:** okamžitě vtáhnout
+
+**Obsah:**
+
+* fullscreen vizuál interiéru (noční atmosféra, 3 zóny v náznaku)
+* krátký claim:
+
+> *„Tvoje místo, když svět zpomalí.“*
+
+**CTA tlačítka:**
+
+* „Objev prostor“
+* „Rezervace“
+
+**Design:**
+
+* tmavé pozadí (černá / deep navy)
+* jemné animace světla (pulsující lampy, pohyb stínů)
+* minimalistická typografie (bez zbytečností)
+
+---
+
+## 2. 🌙 KONCEPT (CO TO JE ZA MÍSTO)
+
+**Cíl:** vysvětlit bez nudy
+
+**Obsah:**
+
+* krátký text:
+
+  * noční režim
+  * produktivita + klid
+  * únik od chaosu dne
+
+**Forma:**
+
+* 2–3 krátké bloky textu
+* doplněné o detailní fotky (světlo, materiály, lidé)
+
+---
+
+## 3. 🧩 3 ZÓNY (HLAVNÍ FEATURE)
+
+**Cíl:** dát jasnou strukturu prostoru
+
+### Layout:
+
+* horizontální scroll nebo 3 karty vedle sebe
+
+---
+
+### 🧠 COWORKING
+
+* lehce živá atmosféra
+* sdílené stoly
+* „pracuj, ale nejsi sám“
+
+---
+
+### 😌 RELAX
+
+* měkké sezení
+* tlumené světlo
+* „zpomal, nikam nespěchej“
+
+---
+
+### 🎯 FOCUS
+
+* ticho
+* individuální místa
+* „deep work mode“
+
+---
+
+**Interakce:**
+
+* hover efekt → změna světla / animace
+* klik → detail zóny (mikro stránka / modal)
+
+---
+
+## 4. 🕒 NOČNÍ REŽIM
+
+**Cíl:** odlišit od klasických kaváren
+
+**Obsah:**
+
+* otevírací doba (např. 18:00–04:00)
+* proč noc:
+
+  * klid
+  * soustředění
+  * jiná energie
+
+**Design:**
+
+* tmavší sekce
+* animovaný přechod den → noc
+
+---
+
+## 5. ☕ NABÍDKA (MINIMALISTICKÁ)
+
+**Cíl:** nezahlcovat
+
+**Obsah:**
+
+* káva
+* malé jídlo
+* noční snacky
+
+**Forma:**
+
+* jednoduchý seznam
+* žádné přehnané obrázky
+* důraz na kvalitu, ne kvantitu
+
+---
+
+## 6. 📍 PROSTOR & ATMOSFÉRA
+
+**Obsah:**
+
+* galerie (reálné fotky)
+* krátká videa (lidi pracují, světlo, pohyb)
+
+**Styl:**
+
+* cinematic
+* low light
+* realistické textury
+
+---
+
+## 7. 📅 REZERVACE
+
+**Cíl:** konverze
+
+**Možnosti:**
+
+* výběr zóny
+* čas
+* počet lidí
+
+**UX:**
+
+* jednoduchý formulář
+* žádné zbytečné kroky
+
+---
+
+## 8. 📱 FOOTER
+
+**Obsah:**
+
+* adresa
+* sociální sítě
+* kontakt
+
+**Design:**
+
+* ultra minimalistický
+* tmavý, nenápadný
+
+---
+
+# 🎨 VIZUÁLNÍ STYL (NADČASOVOST)
+
+## Barvy:
+
+* černá (#0D0D0D)
+* tmavě modrá (#1A1F2B)
+* teplá béžová (#D6CFC7)
+* akcent: tlumená zlatá
+
+---
+
+## Typografie:
+
+* nadpisy: moderní sans-serif (např. Inter / Satoshi)
+* text: čistý, čitelný
+* žádné „hipster ručně psané fonty“
+
+---
+
+## Osvětlení (digitální!):
+
+* glow efekty
+* soft shadows
+* kontrast světlo × tma
+
+---
+
+## Animace:
+
+* pomalé
+* nenápadné
+* „dýchající“ interface
+
+---
+
+# 🧠 UX PRINCIPY
+
+* minimum textu, maximum pocitu
+* jasná navigace
+* vizuální storytelling
+* responzivita (mobil = priorita)
+
+---
+
+# 💡 HLAVNÍ MESSAGE WEBU
+
+Ne:
+
+> „Jsme kavárna.“
+
+Ale:
+
+> „Vyber si, jak chceš fungovat.“
+
+---
+
+# ⚡ SHRNUTÍ PRO PREZENTACI
+
+* web = digitální verze prostoru
+* 3 zóny = 3 režimy uživatele
+* design = noční, klidný, nadčasový
+* UX = jednoduchý, intuitivní
+
+---
+
+Teď to konečně nepůsobí jako „další kavárna s logem a cappuccinem“, ale jako koncept, který má hlavu, patu a důvod existovat. Což je v dnešní záplavě průměrnosti skoro podezřelé.

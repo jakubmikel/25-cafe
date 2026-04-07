@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap');
 @import "tailwindcss";
 @import "tw-animate-css";
 @plugin "@tailwindcss/typography";
@@ -41,7 +41,7 @@
   --color-destructive-border: var(--destructive-border);
 
   --font-sans: var(--app-font-sans);
-  --font-serif: var(--app-font-serif);
+  --font-serif: var(--app-font-sans);
   --font-mono: var(--app-font-mono);
 
   --radius-sm: calc(var(--radius) - 4px);
@@ -51,61 +51,54 @@
 }
 
 :root, .dark {
-  /* Colors for 25 Cafe - Night Deep Work Asylum */
-  /* Background: #0D0B09 -> 24 18% 5% */
-  /* Foreground: #E8D5B7 -> 37 53% 81% */
-  /* Accent: #C68B59 -> 28 48% 56% */
-  /* Card: #1A1410 -> 24 23% 8% */
-  /* Muted: #8B7355 -> 33 24% 44% */
-
-  --background: 24 18% 5%;
-  --foreground: 37 53% 81%;
+  /* Dark, timeless, cinematic theme */
+  --background: 0 0% 5%;
+  --foreground: 32 16% 81%;
   
-  --border: 33 24% 44% / 0.3;
+  --border: 0 0% 15%;
   
-  --card: 24 23% 8%;
-  --card-foreground: 37 53% 81%;
-  --card-border: 33 24% 44% / 0.2;
+  --card: 222 25% 13%;
+  --card-foreground: 32 16% 81%;
+  --card-border: 0 0% 15%;
   
-  --popover: 24 23% 8%;
-  --popover-foreground: 37 53% 81%;
-  --popover-border: 33 24% 44% / 0.2;
+  --popover: 0 0% 5%;
+  --popover-foreground: 32 16% 81%;
+  --popover-border: 0 0% 15%;
   
-  --primary: 28 48% 56%;
-  --primary-foreground: 24 18% 5%;
+  --primary: 39 47% 61%;
+  --primary-foreground: 0 0% 5%;
   
-  --secondary: 24 23% 8%;
-  --secondary-foreground: 37 53% 81%;
+  --secondary: 222 25% 13%;
+  --secondary-foreground: 32 16% 81%;
   
-  --muted: 24 23% 8%;
-  --muted-foreground: 33 24% 44%;
+  --muted: 222 25% 13%;
+  --muted-foreground: 32 16% 60%;
   
-  --accent: 28 48% 56%;
-  --accent-foreground: 24 18% 5%;
+  --accent: 39 47% 61%;
+  --accent-foreground: 0 0% 5%;
   
   --destructive: 0 84% 60%;
-  --destructive-foreground: 37 53% 81%;
+  --destructive-foreground: 32 16% 81%;
   
-  --input: 24 23% 8%;
-  --ring: 28 48% 56%;
+  --input: 0 0% 15%;
+  --ring: 39 47% 61%;
   
-  --chart-1: 28 48% 56%;
-  --chart-2: 37 53% 81%;
-  --chart-3: 33 24% 44%;
-  --chart-4: 24 23% 8%;
-  --chart-5: 24 18% 5%;
+  --chart-1: 39 47% 61%;
+  --chart-2: 32 16% 81%;
+  --chart-3: 222 25% 13%;
+  --chart-4: 0 0% 15%;
+  --chart-5: 0 0% 5%;
 
-  --sidebar: 24 23% 8%;
-  --sidebar-foreground: 37 53% 81%;
-  --sidebar-border: 33 24% 44% / 0.2;
-  --sidebar-primary: 28 48% 56%;
-  --sidebar-primary-foreground: 24 18% 5%;
-  --sidebar-accent: 24 18% 5%;
-  --sidebar-accent-foreground: 37 53% 81%;
-  --sidebar-ring: 28 48% 56%;
+  --sidebar: 0 0% 5%;
+  --sidebar-foreground: 32 16% 81%;
+  --sidebar-border: 0 0% 15%;
+  --sidebar-primary: 39 47% 61%;
+  --sidebar-primary-foreground: 0 0% 5%;
+  --sidebar-accent: 222 25% 13%;
+  --sidebar-accent-foreground: 32 16% 81%;
+  --sidebar-ring: 39 47% 61%;
 
   --app-font-sans: 'Inter', sans-serif;
-  --app-font-serif: 'Playfair Display', serif;
   --app-font-mono: Menlo, monospace;
   
   --radius: 0.5rem;
@@ -119,6 +112,6 @@
     @apply font-sans antialiased bg-background text-foreground selection:bg-accent selection:text-accent-foreground;
   }
   h1, h2, h3, h4, h5, h6 {
-    @apply font-serif;
+    @apply font-sans;
   }
 }

@@ -1,0 +1,32 @@
+uploads = []
+generated = []
+
+[[outputs]]
+id = "9DQrw8YpXWfgkuS4Zda_N"
+uri = "file://artifacts/25cafe/public/hero.jpg"
+type = "image"
+title = "cinematic dark night cafe atmosphere interior warm light"
+
+[[outputs]]
+id = "XFqpZVXZXc-2CYlQcgJJP"
+uri = "file://artifacts/25cafe/public/concept.jpg"
+type = "image"
+title = "night cafe warm lamp light quiet studying"
+
+[[outputs]]
+id = "0kSLl5jeXI0fCbmnTY7P7"
+uri = "file://artifacts/25cafe/public/coworking.jpg"
+type = "image"
+title = "coworking space night shared table"
+
+[[outputs]]
+id = "hwWPwS7qRj8GkhNV1GVSW"
+uri = "file://artifacts/25cafe/public/relax.jpg"
+type = "image"
+title = "relaxing comfortable seating dim light lounge"
+
+[[outputs]]
+id = "ARppqmV_kpUi9BtQ07Tlb"
+uri = "file://artifacts/25cafe/public/focus.jpg"
+type = "image"
+title = "person deep focus computer isolated desk night"
