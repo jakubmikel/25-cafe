@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { MapPin, Clock, Moon, Check, Instagram } from 'lucide-react';
+import { MapPin, Clock, Moon, Check, Instagram, ChevronLeft, ChevronRight, Star, Users } from 'lucide-react';
 import { SiTiktok } from 'react-icons/si';
 import logoSrc from '@assets/cafe25-logo-nobg.png';
 import { Button } from '@/components/ui/button';
@@ -118,6 +118,24 @@ const T = {
       submit: 'Odeslat rezervaci',
       confirmed: 'Rezervace potvrzena',
     },
+    cal: {
+      heading: 'Dostupnost & Události',
+      sub: 'Klikni na den pro zobrazení detailů a předvyplnění data.',
+      prev: 'Předchozí',
+      next: 'Další',
+      days: ['Po', 'Út', 'St', 'Čt', 'Pá', 'So', 'Ne'],
+      months: ['Leden', 'Únor', 'Březen', 'Duben', 'Květen', 'Červen', 'Červenec', 'Srpen', 'Září', 'Říjen', 'Listopad', 'Prosinec'],
+      legendAvail: 'Volno',
+      legendPartial: 'Částečně obsazeno',
+      legendFull: 'Obsazeno',
+      legendEvent: 'Akce / Workshop',
+      eventOn: 'Události v tento den',
+      noEvents: 'Žádné plánované akce.',
+      occupancy: 'Obsazenost',
+      selectDate: 'Vybrat pro rezervaci',
+      past: 'Minulý den',
+      full: 'Obsazeno',
+    },
     footer: {
       tagline: 'Noční deep-work azyl.',
       desc: 'Místo pro ty, kteří nacházejí inspiraci až když se setmí.',
@@ -227,6 +245,24 @@ const T = {
       submit: 'Send reservation',
       confirmed: 'Reservation confirmed',
     },
+    cal: {
+      heading: 'Availability & Events',
+      sub: 'Click a day to see details and pre-fill the reservation date.',
+      prev: 'Previous',
+      next: 'Next',
+      days: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+      months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+      legendAvail: 'Available',
+      legendPartial: 'Partially booked',
+      legendFull: 'Fully booked',
+      legendEvent: 'Event / Workshop',
+      eventOn: 'Events on this day',
+      noEvents: 'No planned events.',
+      occupancy: 'Occupancy',
+      selectDate: 'Select for reservation',
+      past: 'Past day',
+      full: 'Fully booked',
+    },
     footer: {
       tagline: 'Night deep-work refuge.',
       desc: 'A place for those who find inspiration after dark.',
@@ -246,6 +282,51 @@ const PRICES = {
   food: ['175', '195', '155', '175', '155', '135', '145', '165'],
   snacks: ['85', '105', '95', '145', '85', '80', '115', '135'],
 };
+
+interface CafeEvent {
+  date: string;
+  titleCz: string;
+  titleEn: string;
+  time: string;
+  type: 'workshop' | 'event' | 'special';
+  descCz: string;
+  descEn: string;
+}
+
+function makeDate(offsetDays: number): string {
+  const d = new Date('2026-04-08');
+  d.setDate(d.getDate() + offsetDays);
+  return d.toISOString().slice(0, 10);
+}
+
+const EVENTS: CafeEvent[] = [
+  { date: makeDate(3),  titleCz: 'Latte Art Workshop', titleEn: 'Latte Art Workshop', time: '20:00', type: 'workshop', descCz: 'Nauč se kreslit do mléčné pěny s naším baristu. Max. 8 účastníků.', descEn: 'Learn to draw in milk foam with our barista. Max. 8 participants.' },
+  { date: makeDate(7),  titleCz: 'Coffee Cupping', titleEn: 'Coffee Cupping', time: '19:00', type: 'workshop', descCz: 'Slepá degustace čtyř single-origin káv z různých kontinentů.', descEn: 'Blind tasting of four single-origin coffees from different continents.' },
+  { date: makeDate(10), titleCz: 'Jazz & Espresso', titleEn: 'Jazz & Espresso', time: '21:00', type: 'event', descCz: 'Živá jazzová trojice + bar otevřen do 04:00. Vstup volný.', descEn: 'Live jazz trio + bar open until 04:00. Free entry.' },
+  { date: makeDate(14), titleCz: 'Deep Work Night', titleEn: 'Deep Work Night', time: '18:00', type: 'special', descCz: 'Organizovaný blok soustředěné práce. Focus zóna vyhrazena, ticho zajištěno.', descEn: 'Organised deep focus block. Focus zone reserved, silence guaranteed.' },
+  { date: makeDate(18), titleCz: 'V60 Masterclass', titleEn: 'V60 Masterclass', time: '19:30', type: 'workshop', descCz: 'Perfektní přelévaná káva krok za krokem. Přines si vlastní hrnek.', descEn: 'Perfect pour-over step by step. Bring your own mug.' },
+  { date: makeDate(21), titleCz: 'Founders Evening', titleEn: 'Founders Evening', time: '20:00', type: 'event', descCz: 'Neformální večer pro zakladatele startupů. Networking + káva.', descEn: 'Informal evening for startup founders. Networking + coffee.' },
+  { date: makeDate(25), titleCz: 'Latte Art Workshop', titleEn: 'Latte Art Workshop', time: '20:00', type: 'workshop', descCz: 'Opakování oblíbeného workshopu — nová série pro začátečníky.', descEn: 'Repeat of the popular workshop — new series for beginners.' },
+  { date: makeDate(28), titleCz: 'Open Mic Night', titleEn: 'Open Mic Night', time: '21:00', type: 'event', descCz: 'Hudba, slovo, poezie. Přijď poslouchat nebo vystoupit.', descEn: 'Music, spoken word, poetry. Come to listen or perform.' },
+  { date: makeDate(32), titleCz: 'Coffee Cupping #2', titleEn: 'Coffee Cupping #2', time: '19:00', type: 'workshop', descCz: 'Druhý díl degustační série — tentokrát africké specialty.', descEn: 'Second tasting series — this time African specialty coffees.' },
+  { date: makeDate(35), titleCz: 'Slow Sunday Night', titleEn: 'Slow Sunday Night', time: '20:00', type: 'special', descCz: 'Klidný večer, vinyl, svíčky. Žádný program — jen atmosféra.', descEn: 'Quiet evening, vinyl, candles. No programme — just atmosphere.' },
+  { date: makeDate(39), titleCz: 'Deep Work Night', titleEn: 'Deep Work Night', time: '18:00', type: 'special', descCz: 'Organizovaný blok soustředěné práce. Focus zóna vyhrazena.', descEn: 'Organised deep focus block. Focus zone reserved.' },
+  { date: makeDate(43), titleCz: 'Chemex Brewing', titleEn: 'Chemex Brewing', time: '19:30', type: 'workshop', descCz: 'Příprava filtrované kávy metodou Chemex — elegance v pohybu.', descEn: 'Filter coffee preparation by Chemex — elegance in motion.' },
+  { date: makeDate(46), titleCz: 'Jazz & Espresso', titleEn: 'Jazz & Espresso', time: '21:00', type: 'event', descCz: 'Měsíční jazzový večer. Živé trio, cocktail espresso, dobrá nálada.', descEn: 'Monthly jazz evening. Live trio, espresso cocktail, good vibes.' },
+  { date: makeDate(50), titleCz: 'Community Evening', titleEn: 'Community Evening', time: '20:00', type: 'event', descCz: 'Večer naší komunity. Setkej se s lidmi, kteří pracují v noci jako ty.', descEn: 'Our community evening. Meet people who work at night, just like you.' },
+];
+
+function getOccupancy(dateStr: string): 'available' | 'partial' | 'full' {
+  const d = new Date(dateStr);
+  const dow = d.getDay();
+  const seed = (d.getFullYear() * 400 + d.getMonth() * 31 + d.getDate()) % 100;
+  const isWeekend = dow === 5 || dow === 6;
+  const base = isWeekend ? 55 : 25;
+  const val = (base + seed * 0.42) % 100;
+  if (val > 80) return 'full';
+  if (val > 45) return 'partial';
+  return 'available';
+}
 
 export default function Home() {
   const [lang, setLang] = useState<Lang>('cz');
