@@ -309,8 +309,8 @@ export default function Home() {
             <div className="w-16 h-[1px] bg-accent mx-auto" />
           </motion.div>
 
-          <div className="flex flex-wrap justify-center gap-4 md:gap-12 mb-16 font-sans text-sm md:text-base uppercase tracking-widest">
-            {['Káva & Stimulanty', 'Jídlo', 'Noční snacky'].map((tab) => (
+          <div className="flex flex-wrap justify-center gap-6 md:gap-10 mb-16 font-sans text-xs md:text-sm uppercase tracking-widest">
+            {['Espresso & Káva', 'Alternativní přípravy', 'Nápoje', 'Jídlo', 'Noční snacky'].map((tab) => (
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
@@ -329,51 +329,70 @@ export default function Home() {
             ))}
           </div>
 
-          <div className="min-h-[400px]">
+          <div className="min-h-[500px]">
             <AnimatePresence mode="wait">
-              {activeTab === 'Káva & Stimulanty' && (
-                <motion.div
-                  key="kava"
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.3 }}
-                  className="grid md:grid-cols-2 gap-x-20 gap-y-8 font-sans"
-                >
-                  <MenuItem name="Cold Brew" price="95" />
-                  <MenuItem name="Ceremonial Matcha" price="115" />
-                  <MenuItem name="Yerba Maté Shot" price="85" />
-                  <MenuItem name="V60 Filter" price="105" />
-                  <MenuItem name="Espresso" price="75" />
-                  <MenuItem name="Cappuccino" price="85" />
+              {activeTab === 'Espresso & Káva' && (
+                <motion.div key="espresso" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.3 }} className="grid md:grid-cols-2 gap-x-20 gap-y-6 font-sans">
+                  <MenuItem name="Espresso" desc="Klasická italská příprava" price="75" />
+                  <MenuItem name="Doppio" desc="Dvojitý espresso" price="90" />
+                  <MenuItem name="Ristretto" desc="Koncentrovaný, intenzivní" price="80" />
+                  <MenuItem name="Americano" desc="Espresso s horkou vodou" price="85" />
+                  <MenuItem name="Cappuccino" desc="Espresso, pára, hedvábná pěna" price="95" />
+                  <MenuItem name="Flat White" desc="Silné espresso s hladkým mlékem" price="105" />
+                  <MenuItem name="Latte" desc="Jemný a krémový, 300 ml" price="105" />
+                  <MenuItem name="Cortado" desc="Espresso s trochou studeného mléka" price="95" />
+                  <MenuItem name="Macchiato" desc="Espresso, kapka mléčné pěny" price="80" />
+                  <MenuItem name="Affogato" desc="Espresso přes vanilkový zmrzlinový kopeček" price="130" />
+                </motion.div>
+              )}
+              {activeTab === 'Alternativní přípravy' && (
+                <motion.div key="alt" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.3 }} className="grid md:grid-cols-2 gap-x-20 gap-y-6 font-sans">
+                  <MenuItem name="V60 Pour Over" desc="Váš výběr ze single origin" price="115" />
+                  <MenuItem name="Chemex" desc="Elegantní příprava pro dva" price="130" />
+                  <MenuItem name="AeroPress" desc="Plné tělo, čistá chuť" price="110" />
+                  <MenuItem name="Francouzský press" desc="Tradiční, bohatý, plný" price="105" />
+                  <MenuItem name="Cold Brew" desc="24 hodin louhovaný, 300 ml" price="115" />
+                  <MenuItem name="Cold Brew Tonic" desc="Cold brew, tonic, pomeranč" price="135" />
+                  <MenuItem name="Nitro Cold Brew" desc="Dusíkový cold brew na čepu" price="145" />
+                  <MenuItem name="Sifon" desc="Vakuová příprava, vzdušná chuť" price="125" />
+                </motion.div>
+              )}
+              {activeTab === 'Nápoje' && (
+                <motion.div key="napoje" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.3 }} className="grid md:grid-cols-2 gap-x-20 gap-y-6 font-sans">
+                  <MenuItem name="Ceremonial Matcha" desc="Přímý dovoz z Japonska, oat milk" price="125" />
+                  <MenuItem name="Matcha Latte" desc="Šlehaná matcha, teplé mléko" price="115" />
+                  <MenuItem name="Yerba Maté" desc="Tradiční jihoamerická energie" price="95" />
+                  <MenuItem name="Chai Latte" desc="Koření, skořice, kardamom" price="115" />
+                  <MenuItem name="Golden Latte" desc="Kurkuma, zázvor, kokosové mléko" price="115" />
+                  <MenuItem name="Horká čokoláda" desc="Belgická 72%, husté a tmavé" price="105" />
+                  <MenuItem name="Domácí limonáda" desc="Citron, máta, cukrový sirup" price="85" />
+                  <MenuItem name="Sparkling Water" desc="Perlivá, 330 ml" price="55" />
+                  <MenuItem name="Still Water" desc="Neperlivá, 330 ml" price="45" />
+                  <MenuItem name="Džus" desc="Pomerančový nebo jablečný, čerstvý" price="95" />
                 </motion.div>
               )}
               {activeTab === 'Jídlo' && (
-                <motion.div
-                  key="jidlo"
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.3 }}
-                  className="grid md:grid-cols-2 gap-x-20 gap-y-8 font-sans"
-                >
-                  <MenuItem name="Avocado Toast" price="165" />
-                  <MenuItem name="Grilled Cheese" price="145" />
-                  <MenuItem name="Overnight Oats" price="125" />
+                <motion.div key="jidlo" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.3 }} className="grid md:grid-cols-2 gap-x-20 gap-y-6 font-sans">
+                  <MenuItem name="Avocado Toast" desc="Žitný chléb, vejce, microgreens, citron" price="175" />
+                  <MenuItem name="Smoked Salmon Bagel" desc="Losos, cream cheese, kapary, červená cibule" price="195" />
+                  <MenuItem name="Grilled Cheese" desc="Čedar, hořčicový dresing, křupavý chléb" price="155" />
+                  <MenuItem name="Club Sandwich" desc="Kuřecí, slanina, rajče, ledový salát" price="175" />
+                  <MenuItem name="Hummus Bowl" desc="Domácí hummus, zelenina, pita, olive" price="155" />
+                  <MenuItem name="Overnight Oats" desc="Ovesné vločky, lesní ovoce, med, ořechy" price="135" />
+                  <MenuItem name="Granola Bowl" desc="Domácí granola, kokosový jogurt, mango" price="145" />
+                  <MenuItem name="Quiche du Jour" desc="Denní výběr — zeptejte se baristi" price="165" />
                 </motion.div>
               )}
               {activeTab === 'Noční snacky' && (
-                <motion.div
-                  key="snacky"
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.3 }}
-                  className="grid md:grid-cols-2 gap-x-20 gap-y-8 font-sans"
-                >
-                  <MenuItem name="Energy Bites" price="85" />
-                  <MenuItem name="Dark Chocolate 80%" price="95" />
-                  <MenuItem name="Mixed Nuts" price="75" />
+                <motion.div key="snacky" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.3 }} className="grid md:grid-cols-2 gap-x-20 gap-y-6 font-sans">
+                  <MenuItem name="Dark Chocolate 72%" desc="Belgická čokoláda, ručně lámaná" price="85" />
+                  <MenuItem name="Banana Bread" desc="Domácí recept, vlahý, s ořechy" price="105" />
+                  <MenuItem name="Energy Bites" desc="Datlový základ, kešu, kakao" price="95" />
+                  <MenuItem name="Cheese & Crackers" desc="Výběr sýrů, hrozny, ořechy" price="145" />
+                  <MenuItem name="Mixed Nuts & Seeds" desc="Pražená směs, himálajská sůl" price="85" />
+                  <MenuItem name="Granola Bar" desc="Ovesná, med, mandle, tmavá čokoláda" price="80" />
+                  <MenuItem name="Fruit Plate" desc="Sezónní ovoce, máta" price="115" />
+                  <MenuItem name="Tiramisu" desc="Klasický italský, espresso, mascarpone" price="135" />
                 </motion.div>
               )}
             </AnimatePresence>
@@ -547,14 +566,14 @@ export default function Home() {
   );
 }
 
-function MenuItem({ name, price }: { name: string; price: string }) {
+function MenuItem({ name, desc, price }: { name: string; desc?: string; price: string }) {
   return (
-    <div className="flex items-end justify-between gap-4 group">
-      <div className="flex-1 relative">
-        <span className="text-lg text-foreground pr-4 relative bg-secondary z-10">{name}</span>
-        <div className="absolute bottom-1.5 left-0 w-full h-[1px] bg-border/40 group-hover:bg-accent/40 transition-colors" />
+    <div className="flex items-start justify-between gap-4 group border-b border-border/20 pb-5 hover:border-accent/30 transition-colors">
+      <div className="flex-1">
+        <div className="text-base text-foreground group-hover:text-accent transition-colors font-medium">{name}</div>
+        {desc && <div className="text-xs text-foreground/40 mt-0.5 font-light italic">{desc}</div>}
       </div>
-      <span className="text-foreground/60">{price} <span className="text-xs">CZK</span></span>
+      <span className="text-foreground/70 whitespace-nowrap text-sm font-medium tabular-nums">{price} <span className="text-xs text-foreground/40">Kč</span></span>
     </div>
   );
 }
