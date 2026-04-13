@@ -509,7 +509,7 @@ export default function Home() {
           <div className="grid md:grid-cols-3 gap-8 md:gap-6 lg:gap-12">
             {[
               { image: 'https://images.unsplash.com/photo-1521017432531-fbd92d768814?auto=format&fit=crop&w=800&q=80' },
-              { image: 'https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&w=800&q=80' },
+              { image: 'https://images.unsplash.com/photo-1493857671505-72967e2e2760?auto=format&fit=crop&w=800&q=80' },
               { image: 'https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=800&q=80' },
             ].map((zone, i) => (
               <motion.div
