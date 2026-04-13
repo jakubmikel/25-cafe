@@ -48,61 +48,34 @@ const T = {
     },
     night: { sub: 'Zatímco se město ukládá ke spánku, my roztáčíme kávovar.' },
     menu: {
-      heading: 'Menu',
-      tabs: ['Espresso & Káva', 'Alternativní přípravy', 'Nápoje', 'Jídlo', 'Noční snacky'],
-      espresso: [
-        { name: 'Espresso', desc: 'Klasická italská příprava' },
-        { name: 'Doppio', desc: 'Dvojitý espresso' },
-        { name: 'Ristretto', desc: 'Koncentrovaný, intenzivní' },
-        { name: 'Americano', desc: 'Espresso s horkou vodou' },
-        { name: 'Cappuccino', desc: 'Espresso, pára, hedvábná pěna' },
-        { name: 'Flat White', desc: 'Silné espresso s hladkým mlékem' },
-        { name: 'Latte', desc: 'Jemný a krémový, 300 ml' },
-        { name: 'Cortado', desc: 'Espresso s trochou studeného mléka' },
-        { name: 'Macchiato', desc: 'Espresso, kapka mléčné pěny' },
-        { name: 'Affogato', desc: 'Espresso přes vanilkový zmrzlinový kopeček' },
+      heading: 'Menu 25. hodiny',
+      sub: 'Zapomeň na cukrový crash a těžký žaludek. Naše menu je sestavené tak, aby tvůj mozek fungoval na maximum, i když zbytek města spí.',
+      tabs: ['Tekutý Focus', 'Brain-Boosters', 'Deep-Work Fuel', 'The Reward', 'Survival Kits'],
+      focus: [
+        { name: 'Espresso / Lungo', desc: 'Rychlý start. Čistá energie, žádné zbytečnosti.' },
+        { name: 'Batch Brew – Filtrovaná káva', desc: 'Velký hrnek černého zlata na dlouhé čtení skript.' },
+        { name: 'Flat White / Cappuccino', desc: 'Jemnější přistání. Ovesné mléko samozřejmostí — v noci se tráví lépe.' },
+        { name: 'Midnight Decaf – Bezkofeinový filtr', desc: 'Chuť kávy, ale bez bušení srdce ve 3 ráno. Ideální, když už máš hotovo, ale chceš ještě posedět.' },
       ],
-      alt: [
-        { name: 'V60 Pour Over', desc: 'Váš výběr ze single origin' },
-        { name: 'Chemex', desc: 'Elegantní příprava pro dva' },
-        { name: 'AeroPress', desc: 'Plné tělo, čistá chuť' },
-        { name: 'Francouzský press', desc: 'Tradiční, bohatý, plný' },
-        { name: 'Cold Brew', desc: '24 hodin louhovaný, 300 ml' },
-        { name: 'Cold Brew Tonic', desc: 'Cold brew, tonic, pomeranč' },
-        { name: 'Nitro Cold Brew', desc: 'Dusíkový cold brew na čepu' },
-        { name: 'Sifon', desc: 'Vakuová příprava, vzdušná chuť' },
+      boosters: [
+        { name: 'The "25 Boost"', desc: 'Náš signature drink. Cold brew, infuzovaný citrus, kapka javorového sirupu a přírodní extrakt z guarany.' },
+        { name: 'Zen Matcha Latte', desc: 'Prémiová japonská matcha ceremonial grade. Kofein se uvolňuje postupně díky L-theaninu = 4 hodiny čisté hlavy.' },
+        { name: 'Yerba Maté Lemonade', desc: 'Jemně perlivá, ledová a osvěžující. Pro kodéry, co potřebují psát rychlé řádky.' },
+        { name: 'Adaptogenní Reishi Kakao', desc: 'Husté kakao obohacené o medicinální houbu Reishi. Nulový kofein. Perfektní pro Relax zónu.' },
       ],
-      drinks: [
-        { name: 'Ceremonial Matcha', desc: 'Přímý dovoz z Japonska, oat milk' },
-        { name: 'Matcha Latte', desc: 'Šlehaná matcha, teplé mléko' },
-        { name: 'Yerba Maté', desc: 'Tradiční jihoamerická energie' },
-        { name: 'Chai Latte', desc: 'Koření, skořice, kardamom' },
-        { name: 'Golden Latte', desc: 'Kurkuma, zázvor, kokosové mléko' },
-        { name: 'Horká čokoláda', desc: 'Belgická 72%, husté a tmavé' },
-        { name: 'Domácí limonáda', desc: 'Citron, máta, cukrový sirup' },
-        { name: 'Sparkling Water', desc: 'Perlivá, 330 ml' },
-        { name: 'Still Water', desc: 'Neperlivá, 330 ml' },
-        { name: 'Džus', desc: 'Pomerančový nebo jablečný, čerstvý' },
+      fuel: [
+        { name: 'Noční Protein Toast', desc: 'Nasucho opečený kváskový chléb, plátky krůtího masa, avokádo, chilli vločky a kapka limety.' },
+        { name: 'Deadline Bowl', desc: 'Miska, co tě zachrání. Quinoa, edamame, pečená dýně, špenát, ořechy a tahini dresink. Bez lepku.' },
+        { name: 'Brain-Hack Nut Mix', desc: 'Mistička prémiových vlašských a pekanových ořechů s kousky 80% hořké čokolády.' },
       ],
-      food: [
-        { name: 'Avocado Toast', desc: 'Žitný chléb, vejce, microgreens, citron' },
-        { name: 'Smoked Salmon Bagel', desc: 'Losos, cream cheese, kapary, červená cibule' },
-        { name: 'Grilled Cheese', desc: 'Čedar, hořčicový dresing, křupavý chléb' },
-        { name: 'Club Sandwich', desc: 'Kuřecí, slanina, rajče, ledový salát' },
-        { name: 'Hummus Bowl', desc: 'Domácí hummus, zelenina, pita, olive' },
-        { name: 'Overnight Oats', desc: 'Ovesné vločky, lesní ovoce, med, ořechy' },
-        { name: 'Granola Bowl', desc: 'Domácí granola, kokosový jogurt, mango' },
-        { name: 'Quiche du Jour', desc: 'Denní výběr — zeptejte se baristi' },
+      reward: [
+        { name: 'Midnight Banana Bread', desc: 'Náš vlastní, nepřeslazený. S kousky tmavé čokolády a ořechovým máslem navrch.' },
+        { name: 'Raw Energy Ball', desc: 'Malá kulička z datlí, kakaa a espressa. Instantní záchrana, když padá víka.' },
       ],
-      snacks: [
-        { name: 'Dark Chocolate 72%', desc: 'Belgická čokoláda, ručně lámaná' },
-        { name: 'Banana Bread', desc: 'Domácí recept, vlahý, s ořechy' },
-        { name: 'Energy Bites', desc: 'Datlový základ, kešu, kakao' },
-        { name: 'Cheese & Crackers', desc: 'Výběr sýrů, hrozny, ořechy' },
-        { name: 'Mixed Nuts & Seeds', desc: 'Pražená směs, himálajská sůl' },
-        { name: 'Granola Bar', desc: 'Ovesná, med, mandle, tmavá čokoláda' },
-        { name: 'Fruit Plate', desc: 'Sezónní ovoce, máta' },
-        { name: 'Tiramisu', desc: 'Klasický italský, espresso, mascarpone' },
+      kits: [
+        { name: '„Těžká Noc" Combo', desc: 'The "25 Boost" + Noční Protein Toast. Palivo na hrubou práci.' },
+        { name: '„Čisté Flow" Combo', desc: 'Zen Matcha Latte + Deadline Bowl. Pro kreativní práci a design.' },
+        { name: '„Už jen čtu" Combo', desc: 'Adaptogenní Kakao + Banana Bread + Brain-Hack Nut Mix. Zklidnění před koncem.' },
       ],
     },
     reservation: {
@@ -175,61 +148,34 @@ const T = {
     },
     night: { sub: 'While the city falls asleep, we fire up the coffee machine.' },
     menu: {
-      heading: 'Menu',
-      tabs: ['Espresso & Coffee', 'Alternative Brewing', 'Drinks', 'Food', 'Night Snacks'],
-      espresso: [
-        { name: 'Espresso', desc: 'Classic Italian preparation' },
-        { name: 'Doppio', desc: 'Double espresso' },
-        { name: 'Ristretto', desc: 'Concentrated, intense' },
-        { name: 'Americano', desc: 'Espresso with hot water' },
-        { name: 'Cappuccino', desc: 'Espresso, steam, silky foam' },
-        { name: 'Flat White', desc: 'Strong espresso with smooth milk' },
-        { name: 'Latte', desc: 'Gentle and creamy, 300 ml' },
-        { name: 'Cortado', desc: 'Espresso with a touch of cold milk' },
-        { name: 'Macchiato', desc: 'Espresso, a drop of milk foam' },
-        { name: 'Affogato', desc: 'Espresso over a vanilla ice cream scoop' },
+      heading: 'The 25th Hour Menu',
+      sub: 'Forget sugar crashes and heavy stomachs. Our menu is calibrated so your brain runs at peak performance, even when the rest of the city sleeps.',
+      tabs: ['Liquid Focus', 'Brain-Boosters', 'Deep-Work Fuel', 'The Reward', 'Survival Kits'],
+      focus: [
+        { name: 'Espresso / Lungo', desc: 'Quick start. Pure energy, no nonsense.' },
+        { name: 'Batch Brew – Filter Coffee', desc: 'A big mug of black gold for long study sessions.' },
+        { name: 'Flat White / Cappuccino', desc: 'Softer landing. Oat milk is default — easier to digest at night.' },
+        { name: 'Midnight Decaf – Decaf Filter', desc: 'All the taste, none of the heart-pounding at 3 AM. Perfect when you\'re done but want to linger.' },
       ],
-      alt: [
-        { name: 'V60 Pour Over', desc: 'Your choice of single origin' },
-        { name: 'Chemex', desc: 'Elegant preparation for two' },
-        { name: 'AeroPress', desc: 'Full body, clean taste' },
-        { name: 'French Press', desc: 'Traditional, rich, full-bodied' },
-        { name: 'Cold Brew', desc: 'Steeped for 24 hours, 300 ml' },
-        { name: 'Cold Brew Tonic', desc: 'Cold brew, tonic water, orange' },
-        { name: 'Nitro Cold Brew', desc: 'Nitrogen-infused cold brew on tap' },
-        { name: 'Siphon', desc: 'Vacuum brewing, airy flavour' },
+      boosters: [
+        { name: 'The "25 Boost"', desc: 'Our signature drink. Cold brew infused with citrus, a drop of maple syrup and natural guarana extract.' },
+        { name: 'Zen Matcha Latte', desc: 'Premium Japanese ceremonial grade matcha. Caffeine releases gradually via L-theanine = 4 hours of pure focus.' },
+        { name: 'Yerba Maté Lemonade', desc: 'Lightly sparkling, icy and refreshing. For coders who need to write fast lines.' },
+        { name: 'Adaptogenic Reishi Cacao', desc: 'Rich cacao enriched with medicinal Reishi mushroom. Zero caffeine. Perfect for the Relax zone.' },
       ],
-      drinks: [
-        { name: 'Ceremonial Matcha', desc: 'Direct import from Japan, oat milk' },
-        { name: 'Matcha Latte', desc: 'Whisked matcha, warm milk' },
-        { name: 'Yerba Maté', desc: 'Traditional South American energy' },
-        { name: 'Chai Latte', desc: 'Spices, cinnamon, cardamom' },
-        { name: 'Golden Latte', desc: 'Turmeric, ginger, coconut milk' },
-        { name: 'Hot Chocolate', desc: 'Belgian 72%, thick and dark' },
-        { name: 'House Lemonade', desc: 'Lemon, mint, sugar syrup' },
-        { name: 'Sparkling Water', desc: 'Sparkling, 330 ml' },
-        { name: 'Still Water', desc: 'Still, 330 ml' },
-        { name: 'Fresh Juice', desc: 'Orange or apple, freshly pressed' },
+      fuel: [
+        { name: 'Night Protein Toast', desc: 'Dry-toasted sourdough, sliced turkey, smashed avocado, chilli flakes and a squeeze of lime.' },
+        { name: 'Deadline Bowl', desc: 'The bowl that saves you. Quinoa, edamame, roasted pumpkin, spinach, nuts and tahini dressing. Gluten-free.' },
+        { name: 'Brain-Hack Nut Mix', desc: 'A dish of premium walnuts and pecans with chunks of 80% dark chocolate.' },
       ],
-      food: [
-        { name: 'Avocado Toast', desc: 'Rye bread, egg, microgreens, lemon' },
-        { name: 'Smoked Salmon Bagel', desc: 'Salmon, cream cheese, capers, red onion' },
-        { name: 'Grilled Cheese', desc: 'Cheddar, mustard dressing, crispy bread' },
-        { name: 'Club Sandwich', desc: 'Chicken, bacon, tomato, iceberg lettuce' },
-        { name: 'Hummus Bowl', desc: 'House hummus, vegetables, pita, olives' },
-        { name: 'Overnight Oats', desc: 'Rolled oats, forest berries, honey, nuts' },
-        { name: 'Granola Bowl', desc: 'House granola, coconut yogurt, mango' },
-        { name: 'Quiche du Jour', desc: 'Daily selection — ask your barista' },
+      reward: [
+        { name: 'Midnight Banana Bread', desc: 'Our own recipe, not too sweet. With dark chocolate chunks and nut butter on top.' },
+        { name: 'Raw Energy Ball', desc: 'A small ball of dates, cacao and espresso. Instant rescue when your eyelids are dropping.' },
       ],
-      snacks: [
-        { name: 'Dark Chocolate 72%', desc: 'Belgian chocolate, hand-broken' },
-        { name: 'Banana Bread', desc: 'House recipe, moist, with walnuts' },
-        { name: 'Energy Bites', desc: 'Date base, cashew, cacao' },
-        { name: 'Cheese & Crackers', desc: 'Selection of cheeses, grapes, nuts' },
-        { name: 'Mixed Nuts & Seeds', desc: 'Roasted blend, Himalayan salt' },
-        { name: 'Granola Bar', desc: 'Oat, honey, almond, dark chocolate' },
-        { name: 'Fruit Plate', desc: 'Seasonal fruit, mint' },
-        { name: 'Tiramisu', desc: 'Classic Italian, espresso, mascarpone' },
+      kits: [
+        { name: '"Heavy Night" Combo', desc: 'The "25 Boost" + Night Protein Toast. Fuel for heavy-lifting work.' },
+        { name: '"Clean Flow" Combo', desc: 'Zen Matcha Latte + Deadline Bowl. For creative work and design.' },
+        { name: '"Just Reading" Combo', desc: 'Adaptogenic Cacao + Banana Bread + Brain-Hack Nut Mix. Wind down before closing time.' },
       ],
     },
     reservation: {
@@ -279,11 +225,11 @@ const T = {
 } as const;
 
 const PRICES = {
-  espresso: ['75', '90', '80', '85', '95', '105', '105', '95', '80', '130'],
-  alt: ['115', '130', '110', '105', '115', '135', '145', '125'],
-  drinks: ['125', '115', '95', '115', '115', '105', '85', '55', '45', '95'],
-  food: ['175', '195', '155', '175', '155', '135', '145', '165'],
-  snacks: ['85', '105', '95', '145', '85', '80', '115', '135'],
+  focus: ['55', '75', '85', '85'],
+  boosters: ['115', '110', '85', '95'],
+  fuel: ['145', '185', '75'],
+  reward: ['65', '45'],
+  kits: ['250', '295', '235'],
 };
 
 interface CafeEvent {
@@ -554,11 +500,11 @@ export default function Home() {
   };
 
   const menuSections = [
-    t.menu.espresso.map((item, i) => ({ ...item, price: PRICES.espresso[i] })),
-    t.menu.alt.map((item, i) => ({ ...item, price: PRICES.alt[i] })),
-    t.menu.drinks.map((item, i) => ({ ...item, price: PRICES.drinks[i] })),
-    t.menu.food.map((item, i) => ({ ...item, price: PRICES.food[i] })),
-    t.menu.snacks.map((item, i) => ({ ...item, price: PRICES.snacks[i] })),
+    t.menu.focus.map((item, i) => ({ ...item, price: PRICES.focus[i] })),
+    t.menu.boosters.map((item, i) => ({ ...item, price: PRICES.boosters[i] })),
+    t.menu.fuel.map((item, i) => ({ ...item, price: PRICES.fuel[i] })),
+    t.menu.reward.map((item, i) => ({ ...item, price: PRICES.reward[i] })),
+    t.menu.kits.map((item, i) => ({ ...item, price: PRICES.kits[i] })),
   ];
 
   return (
@@ -753,8 +699,13 @@ export default function Home() {
       <section id="menu" className="py-32 md:py-48 bg-secondary">
         <div className="container px-6 mx-auto max-w-4xl">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="text-center mb-20">
-            <h2 className="text-5xl md:text-7xl font-semibold mb-6">{t.menu.heading}</h2>
-            <div className="w-16 h-[1px] bg-accent mx-auto" />
+            <AnimatePresence mode="wait">
+              <motion.h2 key={lang + 'mh'} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} transition={{ duration: 0.4 }} className="text-5xl md:text-7xl font-semibold mb-6">{t.menu.heading}</motion.h2>
+            </AnimatePresence>
+            <div className="w-16 h-[1px] bg-accent mx-auto mb-8" />
+            <AnimatePresence mode="wait">
+              <motion.p key={lang + 'ms'} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.4 }} className="font-sans text-foreground/50 font-light max-w-xl mx-auto text-sm leading-relaxed italic">{t.menu.sub}</motion.p>
+            </AnimatePresence>
           </motion.div>
 
           <div className="flex flex-wrap justify-center gap-6 md:gap-10 mb-16 font-sans text-xs md:text-sm uppercase tracking-widest">
