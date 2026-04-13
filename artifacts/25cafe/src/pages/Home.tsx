@@ -83,7 +83,7 @@ const T = {
         { name: 'Raw Energy Ball', desc: 'Malá kulička z datlí, kakaa a espressa. Instantní záchrana, když padá víka.' },
         { name: 'Dark Chocolate Mousse', desc: 'Belgická 80% čokoláda, lehký a vzdušný. Sladká tečka bez výčitek.' },
         { name: 'Espresso Affogato', desc: 'Kopeček vanilkového gelata zalitý horkým espressem. Odměna za odeslaný projekt.' },
-        { name: 'Mini Cheesecake', desc: 'Individuální cheesecake s lesním ovocem. Krémový, nepřeslazený.' },
+        { name: 'Mini Cheesecake', desc: 'Malý cheesecake s borůvkami a malinami. Jemný, lehký, tak akorát sladký.' },
         { name: 'Matcha Bliss Ball', desc: 'Kulička z kešu, matchy a kokosu. Zelená energie na závěr.' },
       ],
       kits: [
