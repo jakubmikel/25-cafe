@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence, type Variants } from 'framer-motion';
 import { MapPin, Clock, Moon, Check, Instagram, ChevronLeft, ChevronRight, Star, Users } from 'lucide-react';
 import { SiTiktok } from 'react-icons/si';
@@ -331,6 +331,190 @@ function getOccupancy(dateStr: string): 'available' | 'partial' | 'full' {
   return 'available';
 }
 
+type CalT = typeof T.cz.cal;
+
+function BookingCalendar({ lang, tc, onDateSelect }: { lang: Lang; tc: CalT; onDateSelect: (date: string) => void }) {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const [viewYear, setViewYear] = useState(today.getFullYear());
+  const [viewMonth, setViewMonth] = useState(today.getMonth());
+  const [selected, setSelected] = useState<string | null>(null);
+
+  const prevMonth = () => {
+    if (viewMonth === 0) { setViewMonth(11); setViewYear(y => y - 1); }
+    else setViewMonth(m => m - 1);
+  };
+  const nextMonth = () => {
+    if (viewMonth === 11) { setViewMonth(0); setViewYear(y => y + 1); }
+    else setViewMonth(m => m + 1);
+  };
+
+  const firstDay = new Date(viewYear, viewMonth, 1);
+  const daysInMonth = new Date(viewYear, viewMonth + 1, 0).getDate();
+  // Mon=0 offset
+  const startOffset = (firstDay.getDay() + 6) % 7;
+
+  const cells: (string | null)[] = [
+    ...Array(startOffset).fill(null),
+    ...Array.from({ length: daysInMonth }, (_, i) => {
+      const d = new Date(viewYear, viewMonth, i + 1);
+      return d.toISOString().slice(0, 10);
+    }),
+  ];
+  while (cells.length % 7 !== 0) cells.push(null);
+
+  const eventsOnDay = (date: string) => EVENTS.filter(e => e.date === date);
+  const isPast = (date: string) => new Date(date) < today;
+  const isToday = (date: string) => date === today.toISOString().slice(0, 10);
+
+  const selectedEvents = selected ? eventsOnDay(selected) : [];
+  const selectedOccupancy = selected && !isPast(selected) ? getOccupancy(selected) : null;
+
+  const occColor = (occ: ReturnType<typeof getOccupancy>) => {
+    if (occ === 'full') return 'bg-red-900/40 text-red-300';
+    if (occ === 'partial') return 'bg-amber-900/40 text-amber-300';
+    return 'bg-emerald-900/30 text-emerald-300';
+  };
+
+  const eventTypeColor = (type: CafeEvent['type']) => {
+    if (type === 'workshop') return 'bg-accent/20 text-accent border-accent/30';
+    if (type === 'special') return 'bg-purple-900/30 text-purple-300 border-purple-500/30';
+    return 'bg-blue-900/30 text-blue-300 border-blue-500/30';
+  };
+
+  return (
+    <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }} className="mb-20 font-sans">
+      {/* Header */}
+      <div className="flex items-center justify-between mb-8">
+        <button onClick={prevMonth} className="p-2 hover:text-accent transition-colors">
+          <ChevronLeft className="w-5 h-5" />
+        </button>
+        <span className="text-lg tracking-widest uppercase font-light">
+          {tc.months[viewMonth]} {viewYear}
+        </span>
+        <button onClick={nextMonth} className="p-2 hover:text-accent transition-colors">
+          <ChevronRight className="w-5 h-5" />
+        </button>
+      </div>
+
+      {/* Day labels */}
+      <div className="grid grid-cols-7 mb-2">
+        {tc.days.map(d => (
+          <div key={d} className="text-center text-[10px] uppercase tracking-widest text-foreground/30 pb-2">{d}</div>
+        ))}
+      </div>
+
+      {/* Grid */}
+      <div className="grid grid-cols-7 gap-1">
+        {cells.map((date, idx) => {
+          if (!date) return <div key={idx} />;
+          const past = isPast(date);
+          const occ = past ? null : getOccupancy(date);
+          const events = eventsOnDay(date);
+          const hasEvent = events.length > 0;
+          const isSelected = selected === date;
+          const isTodayDate = isToday(date);
+
+          let bg = 'bg-secondary/60 hover:bg-secondary';
+          if (past) bg = 'opacity-30 cursor-default bg-secondary/30';
+          else if (isSelected) bg = 'bg-accent/20 ring-1 ring-accent';
+          else if (occ === 'full') bg = 'bg-red-900/20 hover:bg-red-900/30';
+          else if (occ === 'partial') bg = 'bg-amber-900/20 hover:bg-amber-900/30';
+          else bg = 'bg-emerald-900/10 hover:bg-emerald-900/20';
+
+          return (
+            <button
+              key={date}
+              disabled={past}
+              onClick={() => {
+                if (past) return;
+                setSelected(prev => prev === date ? null : date);
+                onDateSelect(date);
+              }}
+              className={`relative flex flex-col items-center justify-start pt-2 pb-1 min-h-[52px] rounded-sm transition-all duration-200 ${bg} ${!past ? 'cursor-pointer' : ''}`}
+            >
+              <span className={`text-xs font-medium leading-none mb-1 ${isTodayDate ? 'text-accent font-bold' : isSelected ? 'text-accent' : past ? 'text-foreground/30' : 'text-foreground/80'}`}>
+                {new Date(date).getDate()}
+              </span>
+              <div className="flex gap-0.5 flex-wrap justify-center">
+                {hasEvent && events.map((ev, i) => (
+                  <span key={i} className={`w-1.5 h-1.5 rounded-full ${ev.type === 'workshop' ? 'bg-accent' : ev.type === 'special' ? 'bg-purple-400' : 'bg-blue-400'}`} />
+                ))}
+              </div>
+              {occ === 'full' && !past && (
+                <span className="absolute top-0.5 right-0.5 w-1 h-1 rounded-full bg-red-400" />
+              )}
+            </button>
+          );
+        })}
+      </div>
+
+      {/* Legend */}
+      <div className="flex flex-wrap gap-4 mt-5 text-[10px] uppercase tracking-widest text-foreground/40">
+        <span className="flex items-center gap-1.5"><span className="w-3 h-3 rounded-sm bg-emerald-900/30 inline-block" />{tc.legendAvail}</span>
+        <span className="flex items-center gap-1.5"><span className="w-3 h-3 rounded-sm bg-amber-900/30 inline-block" />{tc.legendPartial}</span>
+        <span className="flex items-center gap-1.5"><span className="w-3 h-3 rounded-sm bg-red-900/30 inline-block" />{tc.legendFull}</span>
+        <span className="flex items-center gap-1.5"><span className="w-3 h-1.5 rounded-full bg-accent inline-block" />{tc.legendEvent} (workshop)</span>
+        <span className="flex items-center gap-1.5"><span className="w-3 h-1.5 rounded-full bg-purple-400 inline-block" />Special</span>
+        <span className="flex items-center gap-1.5"><span className="w-3 h-1.5 rounded-full bg-blue-400 inline-block" />Event</span>
+      </div>
+
+      {/* Selected day detail */}
+      <AnimatePresence mode="wait">
+        {selected && (
+          <motion.div
+            key={selected}
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3 }}
+            className="overflow-hidden mt-6"
+          >
+            <div className="border border-border/30 p-6 bg-secondary/50">
+              <div className="flex items-center justify-between mb-4">
+                <span className="text-xs uppercase tracking-widest text-foreground/50">
+                  {new Date(selected).toLocaleDateString(lang === 'cz' ? 'cs-CZ' : 'en-GB', { weekday: 'long', day: 'numeric', month: 'long' })}
+                </span>
+                {selectedOccupancy && (
+                  <span className={`text-[10px] uppercase tracking-widest px-2 py-1 rounded-sm font-medium ${occColor(selectedOccupancy)}`}>
+                    {tc.occupancy}: {selectedOccupancy === 'full' ? tc.full : selectedOccupancy === 'partial' ? tc.legendPartial : tc.legendAvail}
+                  </span>
+                )}
+              </div>
+
+              {selectedEvents.length > 0 ? (
+                <div className="space-y-3">
+                  <p className="text-[10px] uppercase tracking-widest text-foreground/40 mb-3">{tc.eventOn}</p>
+                  {selectedEvents.map((ev, i) => (
+                    <div key={i} className={`flex gap-3 items-start p-3 border rounded-sm ${eventTypeColor(ev.type)}`}>
+                      <div className="flex-shrink-0 mt-0.5">
+                        {ev.type === 'workshop' ? <Star className="w-4 h-4" /> : ev.type === 'special' ? <Moon className="w-4 h-4" /> : <Users className="w-4 h-4" />}
+                      </div>
+                      <div>
+                        <div className="font-medium text-sm">{lang === 'cz' ? ev.titleCz : ev.titleEn}</div>
+                        <div className="text-[11px] opacity-70 mt-0.5">{ev.time} · {lang === 'cz' ? ev.descCz : ev.descEn}</div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <p className="text-xs text-foreground/40 italic">{tc.noEvents}</p>
+              )}
+
+              <button
+                onClick={() => onDateSelect(selected)}
+                className="mt-5 text-xs uppercase tracking-widest text-accent hover:text-accent/70 transition-colors border-b border-accent/30 pb-0.5"
+              >
+                {tc.selectDate} →
+              </button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.div>
+  );
+}
+
 export default function Home() {
   const [lang, setLang] = useState<Lang>('cz');
   const [scrolled, setScrolled] = useState(false);
@@ -622,6 +806,12 @@ export default function Home() {
               </motion.p>
             </AnimatePresence>
           </motion.div>
+
+          <BookingCalendar
+            lang={lang}
+            tc={t.cal as CalT}
+            onDateSelect={(date) => setFormState(prev => ({ ...prev, date }))}
+          />
 
           <motion.form initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }} onSubmit={handleFormSubmit} className="space-y-12 font-sans">
             <div className="grid md:grid-cols-2 gap-x-12 gap-y-10">
