@@ -3,6 +3,9 @@ import { motion, AnimatePresence, type Variants } from 'framer-motion';
 import { MapPin, Clock, Moon, Check, Instagram, ChevronLeft, ChevronRight, Star, Users } from 'lucide-react';
 import { SiTiktok } from 'react-icons/si';
 import logoSrc from '@assets/cafe25-logo-nobg.png';
+import zoneCoworking from '@assets/coworking2_1776104113344.png';
+import zoneRelax from '@assets/relax_2_1776104113346.png';
+import zoneFocus from '@assets/focus_2_1776104113345.png';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 
@@ -508,9 +511,9 @@ export default function Home() {
 
           <div className="grid md:grid-cols-3 gap-8 md:gap-6 lg:gap-12">
             {[
-              { image: 'https://images.unsplash.com/photo-1521017432531-fbd92d768814?auto=format&fit=crop&w=800&q=80' },
-              { image: 'https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&w=800&q=80' },
-              { image: 'https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=800&q=80' },
+              { image: zoneCoworking },
+              { image: zoneRelax },
+              { image: zoneFocus },
             ].map((zone, i) => (
               <motion.div
                 key={i}
