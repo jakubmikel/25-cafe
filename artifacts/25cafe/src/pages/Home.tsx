@@ -487,7 +487,7 @@ export default function Home() {
               </AnimatePresence>
             </motion.div>
             <motion.div initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 1, ease: 'easeOut' }} viewport={{ once: true }} className="relative aspect-[4/5] w-full max-w-md mx-auto lg:max-w-none">
-              <img src="https://images.unsplash.com/photo-1516979187457-637abb4f9353?auto=format&fit=crop&w=1000&q=80" alt="Atmospheric light" className="w-full h-full object-cover grayscale-[20%]" />
+              <img src="https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&w=1000&q=80" alt="Relax zone" className="w-full h-full object-cover grayscale-[20%]" />
               <div className="absolute inset-0 ring-1 ring-inset ring-foreground/10 pointer-events-none" />
             </motion.div>
           </div>
