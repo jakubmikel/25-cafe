@@ -36,7 +36,7 @@ const T = {
       p3: 'Tři zóny. Tři způsoby bytí.',
     },
     zones: {
-      heading: 'Zvol svůj prostor.',
+      heading: 'Zvol si svůj prostor.',
       items: [
         { label: '01 / COWORKING', title: 'Pracuj, ale nejsi sám.', desc: 'Sdílené stoly, jemný ruch. Ideální pro kolaboraci nebo projekty, při kterých ti pomáhá vědomí ostatních.' },
         { label: '02 / RELAX', title: 'Zpomal. Nikam nespěchej.', desc: 'Měkká křesla, tlumené světlo. Prostor pro čtení, rozhovor nebo prosté bytí.' },
