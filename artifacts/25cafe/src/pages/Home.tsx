@@ -1,17 +1,17 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, type Variants } from 'framer-motion';
 import { MapPin, Clock, Moon, Check, Instagram, ChevronLeft, ChevronRight, Star, Users } from 'lucide-react';
 import { SiTiktok } from 'react-icons/si';
 import logoSrc from '@assets/cafe25-logo-nobg.png';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 
-const fadeUp = {
+const fadeUp: Variants = {
   hidden: { opacity: 0, y: 40 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.25, 0.1, 0.25, 1] } }
+  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: 'easeOut' } }
 };
 
-const staggerContainer = {
+const staggerContainer: Variants = {
   hidden: { opacity: 0 },
   visible: { opacity: 1, transition: { staggerChildren: 0.15 } }
 };
