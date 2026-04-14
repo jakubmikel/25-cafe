@@ -687,7 +687,7 @@ export default function Home() {
                   <div className="absolute inset-0 bg-background/20 group-hover:bg-transparent transition-colors duration-500 z-10" />
                   <img src={zone.image} alt={t.zones.items[i].title} className="w-full h-full object-cover transition-all duration-700 group-hover:scale-105 group-hover:brightness-110 grayscale-[30%] group-hover:grayscale-0" />
                 </div>
-                <div className="p-8 lg:p-10 flex-1 flex flex-col justify-center gap-4 border-l-2 border-transparent group-hover:border-accent transition-all duration-300 relative bg-background z-20 group-hover:-translate-y-2">
+                <div className="p-8 lg:p-10 flex-1 flex flex-col justify-start border-l-2 border-transparent group-hover:border-accent transition-all duration-300 relative bg-background z-20 group-hover:-translate-y-2">
                   <div className="text-accent font-sans text-xs tracking-[0.2em] mb-4">{t.zones.items[i].label}</div>
                   <AnimatePresence mode="wait">
                     <motion.h3 key={lang + 'zt' + i} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }} className="text-3xl lg:text-4xl mb-4 leading-tight">
