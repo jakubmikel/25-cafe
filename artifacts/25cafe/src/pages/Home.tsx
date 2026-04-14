@@ -567,7 +567,7 @@ export default function Home() {
           <div className="flex items-center gap-5">
             <div className="text-sm tracking-[0.2em] font-light text-foreground/80 flex items-center gap-2">
               <Clock className="w-4 h-4 text-accent hidden sm:block" />
-              18:00 — 04:00
+              16:00 — 01:00
             </div>
             <button
               onClick={() => setLang(l => l === 'cz' ? 'en' : 'cz')}
@@ -818,7 +818,7 @@ export default function Home() {
 
               <div className="space-y-4">
                 <label className="text-xs uppercase tracking-[0.15em] text-foreground/50">{t.reservation.time}</label>
-                <Input type="time" name="time" min="18:00" max="04:00" value={formState.time} onChange={handleFormChange} required className="bg-transparent border-0 border-b border-border/50 pb-3 text-lg focus-visible:ring-0 focus-visible:border-accent rounded-none px-0" />
+                <Input type="time" name="time" min="16:00" max="01:00" value={formState.time} onChange={handleFormChange} required className="bg-transparent border-0 border-b border-border/50 pb-3 text-lg focus-visible:ring-0 focus-visible:border-accent rounded-none px-0" />
               </div>
 
               <div className="space-y-4">
@@ -870,7 +870,7 @@ export default function Home() {
               <div className="flex flex-col gap-2 text-foreground/70 font-light">
                 <span className="text-foreground font-medium mb-2 uppercase tracking-widest text-xs">{t.footer.location}</span>
                 <span className="flex items-center gap-2"><MapPin className="w-4 h-4 text-accent" /> {t.footer.address}</span>
-                <span className="flex items-center gap-2"><Clock className="w-4 h-4 text-accent" /> 18:00 – 04:00</span>
+                <span className="flex items-center gap-2"><Clock className="w-4 h-4 text-accent" /> 16:00 – 01:00</span>
               </div>
             </div>
 
