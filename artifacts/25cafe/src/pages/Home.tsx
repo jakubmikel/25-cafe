@@ -543,7 +543,6 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-background text-foreground selection:bg-accent selection:text-background">
-
       {/* NAVIGATION */}
       <nav className={`fixed top-0 w-full z-50 transition-all duration-300 border-b border-transparent ${scrolled ? 'bg-[#0D0D0D]/85 backdrop-blur-[20px] border-border/50 shadow-lg' : 'bg-transparent'}`}>
         <div className="container mx-auto px-6 sm:px-8 h-20 flex items-center justify-between">
@@ -580,7 +579,6 @@ export default function Home() {
           </div>
         </div>
       </nav>
-
       {/* HERO */}
       <section className="relative min-h-[100dvh] flex items-center justify-center overflow-hidden pt-20">
         <div className="absolute inset-0 z-0">
@@ -634,7 +632,6 @@ export default function Home() {
           <div className="w-[1px] h-16 bg-gradient-to-b from-accent to-transparent animate-pulse" />
         </motion.div>
       </section>
-
       {/* CONCEPT */}
       <section className="py-32 md:py-48 bg-background relative z-10">
         <div className="container px-6 mx-auto">
@@ -660,7 +657,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
       {/* THREE ZONES */}
       <section id="zones" className="py-32 md:py-40 bg-secondary relative">
         <div className="container px-6 mx-auto">
@@ -709,7 +705,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
       {/* NIGHT HOURS */}
       <section className="py-40 bg-background text-center relative flex flex-col items-center justify-center border-y border-border/30">
         <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerContainer} className="container px-6 flex flex-col items-center">
@@ -718,9 +713,7 @@ export default function Home() {
               <Moon className="w-16 h-16 text-accent mx-auto" strokeWidth={1} />
             </motion.div>
           </motion.div>
-          <motion.h2 variants={fadeUp} className="text-6xl md:text-8xl font-serif tracking-widest text-foreground font-light mb-8">
-            18:00 — 04:00
-          </motion.h2>
+          <motion.h2 variants={fadeUp} className="text-6xl md:text-8xl font-serif tracking-widest text-foreground font-light mb-8">16:00 — 01:00</motion.h2>
           <AnimatePresence mode="wait">
             <motion.p key={lang + 'ns'} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.4 }} className="font-sans font-light text-xl md:text-2xl text-foreground/60 max-w-2xl">
               {t.night.sub}
@@ -728,7 +721,6 @@ export default function Home() {
           </AnimatePresence>
         </motion.div>
       </section>
-
       {/* MENU */}
       <section id="menu" className="py-32 md:py-48 bg-secondary">
         <div className="container px-6 mx-auto max-w-4xl">
@@ -775,7 +767,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
       {/* RESERVATION */}
       <section id="reservation" className="py-32 md:py-48 bg-background border-t border-border/30">
         <div className="container px-6 mx-auto max-w-3xl">
@@ -847,7 +838,6 @@ export default function Home() {
           </motion.form>
         </div>
       </section>
-
       {/* FOOTER */}
       <footer className="bg-secondary pt-24 pb-12 font-sans text-sm">
         <div className="container px-6 mx-auto">
