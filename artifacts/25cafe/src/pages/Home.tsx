@@ -846,7 +846,7 @@ export default function Home() {
               <img src={logoSrc} alt="Café 25" className="h-20 w-20 object-contain mb-8 opacity-80" />
               <AnimatePresence mode="wait">
                 <motion.p key={lang + 'ft'} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }} className="font-serif text-2xl lg:text-3xl text-foreground mb-4">
-                  {t.footer.tagline}
+                  Noční deep-work zašívárna.
                 </motion.p>
               </AnimatePresence>
               <AnimatePresence mode="wait">
