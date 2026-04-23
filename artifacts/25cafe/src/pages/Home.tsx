@@ -134,7 +134,7 @@ const T = {
       desc: 'Místo pro ty, kteří nacházejí inspiraci až když se setmí.',
       location: 'Lokace',
       contact: 'Kontakt',
-      address: 'Liberec, Poblíž kampusu',
+      address: 'Studentská 1402/2, Liberec — kampus TUL',
       copyright: '© 2025 Café 25 — Liberec',
       night: 'The night belongs to you.',
     },
@@ -251,7 +251,7 @@ const T = {
       desc: 'A place for those who find inspiration after dark.',
       location: 'Location',
       contact: 'Contact',
-      address: 'Liberec, Near campus',
+      address: 'Studentská 1402/2, Liberec — TUL Campus',
       copyright: '© 2025 Café 25 — Liberec',
       night: 'The night belongs to you.',
     },
@@ -496,7 +496,21 @@ function BookingCalendar({ lang, tc, onDateSelect }: { lang: Lang; tc: CalT; onD
 }
 
 export default function Home() {
-  const [lang, setLang] = useState<Lang>('cz');
+  const [lang, setLang] = useState<Lang>(() => {
+    if (typeof window !== 'undefined') {
+      const stored = window.localStorage.getItem('cafe25-lang');
+      if (stored === 'cz' || stored === 'en') return stored;
+    }
+    return 'cz';
+  });
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      window.localStorage.setItem('cafe25-lang', lang);
+      document.documentElement.lang = lang;
+    }
+  }, [lang]);
+
   const [scrolled, setScrolled] = useState(false);
   const [activeTab, setActiveTab] = useState(0);
   const [formState, setFormState] = useState({ zone: '', date: '', time: '', guests: '', name: '', email: '' });
@@ -643,7 +657,7 @@ export default function Home() {
                 </motion.h2>
               </AnimatePresence>
               <AnimatePresence mode="wait">
-                <motion.div key={lang + 'cp'} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.4 }} className="space-y-6 font-sans font-light text-lg md:text-xl text-foreground/80 leading-relaxed">
+                <motion.div key={lang + 'cp'} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.4 }} className="space-y-7 font-sans font-light text-lg md:text-xl text-foreground/80 leading-loose md:leading-loose">
                   <p>{t.concept.p1}</p>
                   <p>{t.concept.p2}</p>
                   <p className="text-accent uppercase tracking-widest text-sm pt-4 font-medium">{t.concept.p3}</p>
@@ -651,7 +665,7 @@ export default function Home() {
               </AnimatePresence>
             </motion.div>
             <motion.div initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 1, ease: 'easeOut' }} viewport={{ once: true }} className="relative aspect-[4/5] w-full max-w-md mx-auto lg:max-w-none">
-              <img src="https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&w=1000&q=80" alt="Relax zone" className="w-full h-full object-cover grayscale-[20%]" />
+              <img src="https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&w=1000&q=80" alt="Relax zone" loading="lazy" className="w-full h-full object-cover grayscale-[20%]" />
               <div className="absolute inset-0 ring-1 ring-inset ring-foreground/10 pointer-events-none" />
             </motion.div>
           </div>
@@ -685,7 +699,7 @@ export default function Home() {
               >
                 <div className="h-[340px] w-full relative overflow-hidden flex-shrink-0">
                   <div className="absolute inset-0 bg-background/20 group-hover:bg-transparent transition-colors duration-500 z-10" />
-                  <img src={zone.image} alt={t.zones.items[i].title} className="w-full h-full object-cover transition-all duration-700 group-hover:scale-105 group-hover:brightness-110 grayscale-[30%] group-hover:grayscale-0" />
+                  <img src={zone.image} alt={t.zones.items[i].title} loading="lazy" className="w-full h-full object-cover transition-all duration-700 group-hover:scale-105 group-hover:brightness-110 grayscale-[30%] group-hover:grayscale-0" />
                 </div>
                 <div className="p-8 lg:p-10 flex-1 flex flex-col justify-start border-l-2 border-transparent group-hover:border-accent transition-all duration-300 relative bg-background z-20 group-hover:-translate-y-2">
                   <div className="text-accent font-sans text-xs tracking-[0.2em] mb-4">{t.zones.items[i].label}</div>
@@ -753,10 +767,10 @@ export default function Home() {
             <AnimatePresence mode="wait">
               <motion.div
                 key={lang + activeTab}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.3 }}
+                initial={{ opacity: 0, y: 14, filter: 'blur(4px)' }}
+                animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                exit={{ opacity: 0, y: -10, filter: 'blur(4px)' }}
+                transition={{ duration: 0.45, ease: 'easeOut' }}
                 className="grid md:grid-cols-2 gap-x-20 gap-y-6 font-sans"
               >
                 {menuSections[activeTab].map((item) => (
@@ -841,6 +855,25 @@ export default function Home() {
       {/* FOOTER */}
       <footer className="bg-secondary pt-24 pb-12 font-sans text-sm">
         <div className="container px-6 mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-80px' }}
+            transition={{ duration: 0.8, ease: 'easeOut' }}
+            className="mb-20"
+          >
+            <div className="aspect-[21/9] w-full overflow-hidden border border-border/40 grayscale-[40%] hover:grayscale-0 transition-all duration-700">
+              <iframe
+                title="Café 25 — kampus TUL Liberec"
+                src="https://www.google.com/maps?q=Studentsk%C3%A1+1402%2F2%2C+Liberec&hl=cs&z=16&output=embed"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                className="w-full h-full border-0"
+                allowFullScreen
+              />
+            </div>
+          </motion.div>
+
           <div className="grid grid-cols-1 md:grid-cols-4 gap-16 mb-20">
             <div className="md:col-span-2">
               <img src={logoSrc} alt="Café 25" className="h-20 w-20 object-contain mb-8 opacity-80" />
