@@ -282,7 +282,39 @@ function makeDate(offsetDays: number): string {
   return d.toISOString().slice(0, 10);
 }
 
+function generateExtendedHoursEvents(): CafeEvent[] {
+  const events: CafeEvent[] = [];
+  const dayConfigs: { dow: number; titleCz: string; titleEn: string; time: string; descCz: string; descEn: string }[] = [
+    { dow: 1, time: '22:00', titleCz: 'Focus Monday', titleEn: 'Focus Monday', descCz: 'Prodloužená otevírací doba do 01:00. Klidný start týdne pro hlubokou práci.', descEn: 'Extended opening hours until 01:00. A calm start to the week for deep work.' },
+    { dow: 2, time: '22:00', titleCz: 'Silent Tuesday', titleEn: 'Silent Tuesday', descCz: 'Prodloužená doba do 01:00. Tichý režim — ideální pro psaní a čtení.', descEn: 'Extended hours until 01:00. Silent mode — ideal for writing and reading.' },
+    { dow: 3, time: '22:00', titleCz: 'Deep Work Wednesday', titleEn: 'Deep Work Wednesday', descCz: 'Prodloužená doba do 01:00. Focus zóna otevřená přes půlnoc.', descEn: 'Extended hours until 01:00. Focus zone open past midnight.' },
+    { dow: 4, time: '22:00', titleCz: 'Study Night', titleEn: 'Study Night', descCz: 'Prodloužená doba do 02:00. Filtr za 50 Kč po 22:00 pro studenty s ISIC.', descEn: 'Extended hours until 02:00. Filter coffee 50 CZK after 22:00 for ISIC students.' },
+  ];
+
+  const start = new Date('2026-04-08');
+  start.setHours(0, 0, 0, 0);
+  for (let week = 0; week < 8; week++) {
+    for (const cfg of dayConfigs) {
+      const d = new Date(start);
+      d.setDate(d.getDate() + week * 7);
+      const diff = (cfg.dow - d.getDay() + 7) % 7;
+      d.setDate(d.getDate() + diff);
+      events.push({
+        date: d.toISOString().slice(0, 10),
+        titleCz: cfg.titleCz,
+        titleEn: cfg.titleEn,
+        time: cfg.time,
+        type: 'special',
+        descCz: cfg.descCz,
+        descEn: cfg.descEn,
+      });
+    }
+  }
+  return events;
+}
+
 const EVENTS: CafeEvent[] = [
+  ...generateExtendedHoursEvents(),
   { date: makeDate(3),  titleCz: 'Latte Art Workshop', titleEn: 'Latte Art Workshop', time: '20:00', type: 'workshop', descCz: 'Nauč se kreslit do mléčné pěny s naším baristu. Max. 8 účastníků.', descEn: 'Learn to draw in milk foam with our barista. Max. 8 participants.' },
   { date: makeDate(7),  titleCz: 'Coffee Cupping', titleEn: 'Coffee Cupping', time: '19:00', type: 'workshop', descCz: 'Slepá degustace čtyř single-origin káv z různých kontinentů.', descEn: 'Blind tasting of four single-origin coffees from different continents.' },
   { date: makeDate(10), titleCz: 'Jazz & Espresso', titleEn: 'Jazz & Espresso', time: '21:00', type: 'event', descCz: 'Živá jazzová trojice + bar otevřen do 04:00. Vstup volný.', descEn: 'Live jazz trio + bar open until 04:00. Free entry.' },
@@ -580,7 +612,7 @@ export default function Home() {
           <div className="flex items-center gap-5">
             <div className="text-sm tracking-[0.2em] font-light text-foreground/80 flex items-center gap-2">
               <Clock className="w-4 h-4 text-accent hidden sm:block" />
-              16:00 — 01:00
+              08:00 — 22:00
             </div>
             <button
               onClick={() => setLang(l => l === 'cz' ? 'en' : 'cz')}
@@ -727,7 +759,7 @@ export default function Home() {
               <Moon className="w-16 h-16 text-accent mx-auto" strokeWidth={1} />
             </motion.div>
           </motion.div>
-          <motion.h2 variants={fadeUp} className="text-6xl md:text-8xl font-serif tracking-widest text-foreground font-light mb-8">16:00 — 01:00</motion.h2>
+          <motion.h2 variants={fadeUp} className="text-6xl md:text-8xl font-serif tracking-widest text-foreground font-light mb-8">08:00 — 22:00</motion.h2>
           <AnimatePresence mode="wait">
             <motion.p key={lang + 'ns'} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.4 }} className="font-sans font-light text-xl md:text-2xl text-foreground/60 max-w-2xl">
               {t.night.sub}
@@ -823,7 +855,7 @@ export default function Home() {
 
               <div className="space-y-4">
                 <label className="text-xs uppercase tracking-[0.15em] text-foreground/50">{t.reservation.time}</label>
-                <Input type="time" name="time" min="16:00" max="01:00" value={formState.time} onChange={handleFormChange} required className="bg-transparent border-0 border-b border-border/50 pb-3 text-lg focus-visible:ring-0 focus-visible:border-accent rounded-none px-0" />
+                <Input type="time" name="time" min="08:00" max="22:00" value={formState.time} onChange={handleFormChange} required className="bg-transparent border-0 border-b border-border/50 pb-3 text-lg focus-visible:ring-0 focus-visible:border-accent rounded-none px-0" />
               </div>
 
               <div className="space-y-4">
@@ -893,7 +925,7 @@ export default function Home() {
               <div className="flex flex-col gap-2 text-foreground/70 font-light">
                 <span className="text-foreground font-medium mb-2 uppercase tracking-widest text-xs">{t.footer.location}</span>
                 <span className="flex items-center gap-2"><MapPin className="w-4 h-4 text-accent" /> {t.footer.address}</span>
-                <span className="flex items-center gap-2"><Clock className="w-4 h-4 text-accent" /> 16:00 – 01:00</span>
+                <span className="flex items-center gap-2"><Clock className="w-4 h-4 text-accent" /> 08:00 – 22:00</span>
               </div>
             </div>
 
