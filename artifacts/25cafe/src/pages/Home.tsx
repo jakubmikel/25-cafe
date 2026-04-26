@@ -528,7 +528,7 @@ export default function Home() {
     setActiveTab(0);
   }, [lang]);
 
-  const scrollTo = (e: React.MouseEvent, selector: string) => {
+  const scrollTo = (e: React.MouseEvent<HTMLElement>, selector: string) => {
     e.preventDefault();
     document.querySelector(selector)?.scrollIntoView({ behavior: 'smooth' });
   };
@@ -560,7 +560,7 @@ export default function Home() {
       {/* NAVIGATION */}
       <nav className={`fixed top-0 w-full z-50 transition-all duration-300 border-b border-transparent ${scrolled ? 'bg-[#0D0D0D]/85 backdrop-blur-[20px] border-border/50 shadow-lg' : 'bg-transparent'}`}>
         <div className="container mx-auto px-6 sm:px-8 h-20 flex items-center justify-between">
-          <a href="#" onClick={(e) => scrollTo(e, 'body')} className="flex-shrink-0">
+          <a href="/" onClick={(e) => scrollTo(e, 'body')} className="flex-shrink-0" aria-label="Café 25 — domů">
             <img src={logoSrc} alt="Café 25" className="h-12 w-12 object-contain" />
           </a>
 
@@ -584,6 +584,7 @@ export default function Home() {
             </div>
             <button
               onClick={() => setLang(l => l === 'cz' ? 'en' : 'cz')}
+              aria-label={lang === 'cz' ? 'Přepnout jazyk do angličtiny' : 'Switch language to Czech'}
               className="flex items-center gap-1 text-xs tracking-widest font-medium border border-border/40 hover:border-accent px-3 py-1.5 transition-colors"
             >
               <span className={lang === 'cz' ? 'text-accent' : 'text-foreground/40'}>CZ</span>
@@ -633,10 +634,10 @@ export default function Home() {
               </motion.p>
             </AnimatePresence>
             <motion.div variants={fadeUp} className="flex flex-col sm:flex-row items-center gap-6 w-full sm:w-auto">
-              <Button className="w-full sm:w-auto bg-accent hover:bg-accent/80 text-background px-12 py-7 rounded-none uppercase tracking-widest text-sm font-medium transition-all" onClick={(e) => scrollTo(e as any, '#zones')}>
+              <Button className="w-full sm:w-auto bg-accent hover:bg-accent/80 text-background px-12 py-7 rounded-none uppercase tracking-widest text-sm font-medium transition-all" onClick={(e) => scrollTo(e, '#zones')}>
                 {t.hero.cta1}
               </Button>
-              <Button variant="outline" className="w-full sm:w-auto border-foreground hover:bg-foreground hover:text-background px-12 py-7 rounded-none uppercase tracking-widest text-sm font-medium transition-all" onClick={(e) => scrollTo(e as any, '#reservation')}>
+              <Button variant="outline" className="w-full sm:w-auto border-foreground hover:bg-foreground hover:text-background px-12 py-7 rounded-none uppercase tracking-widest text-sm font-medium transition-all" onClick={(e) => scrollTo(e, '#reservation')}>
                 {t.hero.cta2}
               </Button>
             </motion.div>
@@ -823,7 +824,7 @@ export default function Home() {
 
               <div className="space-y-4">
                 <label className="text-xs uppercase tracking-[0.15em] text-foreground/50">{t.reservation.time}</label>
-                <Input type="time" name="time" min="16:00" max="01:00" value={formState.time} onChange={handleFormChange} required className="bg-transparent border-0 border-b border-border/50 pb-3 text-lg focus-visible:ring-0 focus-visible:border-accent rounded-none px-0" />
+                <Input type="time" name="time" value={formState.time} onChange={handleFormChange} required className="bg-transparent border-0 border-b border-border/50 pb-3 text-lg focus-visible:ring-0 focus-visible:border-accent rounded-none px-0" />
               </div>
 
               <div className="space-y-4">
@@ -879,7 +880,7 @@ export default function Home() {
               <img src={logoSrc} alt="Café 25" className="h-20 w-20 object-contain mb-8 opacity-80" />
               <AnimatePresence mode="wait">
                 <motion.p key={lang + 'ft'} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }} className="font-serif text-2xl lg:text-3xl text-foreground mb-4">
-                  Noční deep-work zašívárna.
+                  {t.footer.tagline}
                 </motion.p>
               </AnimatePresence>
               <AnimatePresence mode="wait">
@@ -902,8 +903,8 @@ export default function Home() {
                 <span className="text-foreground font-medium mb-2 uppercase tracking-widest text-xs">{t.footer.contact}</span>
                 <a href="mailto:hello@cafe25.cz" className="hover:text-accent transition-colors">hello@cafe25.cz</a>
                 <div className="flex items-center gap-4 mt-4">
-                  <a href="#" className="hover:text-accent transition-colors"><Instagram className="w-5 h-5" /></a>
-                  <a href="#" className="hover:text-accent transition-colors"><SiTiktok className="w-4 h-4" /></a>
+                  <a href="#" aria-label="Instagram Café 25" className="hover:text-accent transition-colors"><Instagram className="w-5 h-5" /></a>
+                  <a href="#" aria-label="TikTok Café 25" className="hover:text-accent transition-colors"><SiTiktok className="w-4 h-4" /></a>
                 </div>
               </div>
             </div>
